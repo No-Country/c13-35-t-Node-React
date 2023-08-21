@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function AbouUs(): JSX.Element {
+export default function myProfile(): JSX.Element {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>my Profile</h1>
         </div>
     )
 }
