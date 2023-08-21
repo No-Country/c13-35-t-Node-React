@@ -1,9 +1,9 @@
 import React from 'react';
-
+import Image from 'next/image';
 export default function Landing(): JSX.Element {
     return (
         <div>
-            <h1>Hola Soy el Log-In</h1>
+            <Image src="/images/landing.png" alt="landing" width={500} height={500} />
         </div>
     )
 }
