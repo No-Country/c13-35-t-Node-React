@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans&family=Roboto:ital,wght@1,100&display=swap");
+
+.generalContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 64px;
+  align-items: center;
+}
+
+.botonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+
+.botonContainerFijos {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 3.25rem;
+}
+
+.botonFijo {
+  color: #000;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.botonContainerCambiables {
+  display: flex;
+}
+.botonCambianteA {
+  color: #fff;
+  text-align: center;
+  font-family: Inria Sans;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 137.885%;
+  border-radius: 0.3125rem;
+  border: 1px solid rgba(87, 103, 2, 0.13);
+  background: rgba(87, 103, 2, 0.75);
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.botonCambianteB {
+  text-align: center;
+  font-family: Inria Sans;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 137.885%;
+  border-radius: 0.3125rem;
+  border: 1px solid rgba(87, 103, 2, 0.13);
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border: 1px solid rgba(87, 103, 2, 0.75);
+}
+
+.botonContainerCambiables {
+  gap: 0.5rem;
+}
