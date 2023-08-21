@@ -1,21 +1,9 @@
 import React from 'react';
 
-// Definimos una interfaz para las props del componente
-interface PageProps {
-    // Aquí puedes agregar las propiedades que esperas recibir. Por ejemplo:
-    // title?: string;  // Una propiedad opcional de título
-    // content: string;  // Una propiedad requerida de contenido
-
-    title?: string;
-    content: string;
-}
-
-const MyProfile: React.FC<PageProps> = ({ title, content }) => {
+export default function AbouUs(): JSX.Element {
     return (
         <div>
-            <h1>{title} hola soy my profile</h1>
-            <p>{content}</p>
+            <h1>Home</h1>
         </div>
-    );
+    )
 }
-export default MyProfile;
