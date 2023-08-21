@@ -10,14 +10,12 @@ interface PageProps {
     content: string;
 }
 
-const Page: React.FC<PageProps> = (props) => {
+const MyProfile: React.FC<PageProps> = ({ title, content }) => {
     return (
         <div>
-            <h1>{props.title} hola</h1>
-            <p>{props.content}</p>
-
+            <h1>{title} hola soy my profile</h1>
+            <p>{content}</p>
         </div>
     );
 }
-
-export default Page;
+export default MyProfile;

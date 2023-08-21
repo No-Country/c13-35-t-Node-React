@@ -10,7 +10,7 @@ interface PageProps {
     content: string;
 }
 
-const Page: React.FC<PageProps> = ({ title, content }) => {
+const Landing: React.FC<PageProps> = ({ title, content }) => {
     return (
         <div>
             <h1>{title} hola soy el landing</h1>
@@ -18,4 +18,4 @@ const Page: React.FC<PageProps> = ({ title, content }) => {
         </div>
     );
 }
-export default Page;
+export default Landing;
