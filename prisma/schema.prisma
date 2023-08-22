@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  password String
+  name     String?
+  role     UserRole  @default(Client)
+  bookings Booking[]
+  fields   Field[]
+  reviews  Review[]
+}
+
+model Field {
+  id           Int          @id @default(autoincrement())
+  name         String
+  description  String?
+  location     String
+  type         FieldType
+  surface      FieldSurface
+  size         String?
+  facilities   String[]
+  photos       String[]
+  price        Float
+  availability Boolean      @default(true)
+  ownerId      Int
+  bookings     Booking[]
+  owner        User         @relation(fields: [ownerId], references: [id])
+  reviews      Review[]
+}
+
+model Booking {
+  id       Int           @id @default(autoincrement())
+  date     DateTime
+  hours    Int
+  clientId Int
+  fieldId  Int
+  price    Float
+  status   BookingStatus
+  client   User          @relation(fields: [clientId], references: [id])
+  field    Field         @relation(fields: [fieldId], references: [id])
+}
+
+model Review {
+  id       Int     @id @default(autoincrement())
+  rating   Int
+  comment  String?
+  clientId Int
+  fieldId  Int
+  client   User    @relation(fields: [clientId], references: [id])
+  field    Field   @relation(fields: [fieldId], references: [id])
+}
+
+enum UserRole {
+  Client
+  Owner
+  Admin
+}
+
+enum FieldType {
+  Football
+  Tennis
+  Paddle
+  Basketball
+}
+
+enum FieldSurface {
+  SyntheticTurf
+  Cement
+  Parquet
+}
+
+enum BookingStatus {
+  Confirmed
+  Pending
+  Canceled
+}
