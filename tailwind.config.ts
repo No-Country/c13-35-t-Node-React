@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inria: ["Inria Sans", "sans-serif"], // Agrega 'Inria Sans' con fallback a 'sans-serif'
+        roboto: ["Roboto", "sans-serif"], // Agrega 'Roboto' con fallback a 'sans-serif'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
