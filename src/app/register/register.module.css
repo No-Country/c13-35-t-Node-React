@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inria+Sans&family=Roboto:ital,wght@1,100&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 .contenedorPrincipal {
   display: flex;
@@ -34,19 +34,38 @@
   align-items: center;
 }
 
-.textNumeration {
+.textNumeration1 {
   display: flex;
-  width: 1.375rem;
+  width: 1.5rem;
   justify-content: center;
   align-items: center;
-  border-radius: 3.125rem;
+  border-radius: 3rem;
   background: #576702;
   color: #fff;
   font-family: "Inria Sans", sans-serif;
-  font-size: 1;
+  font-size: 12px;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.75rem; /* 280% */
+  line-height: 1.5rem;
+  margin-top: 0.8rem; /* 280% */
+  margin-left: 2rem;
+}
+
+.textNumeration2 {
+  display: flex;
+  width: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3.125rem;
+  background: #fff;
+  color: #000;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  margin-top: 0.8rem;
+  /* 280% */
 }
 
 .title {
@@ -55,7 +74,7 @@
   font-size: 1.625rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 3.4375rem;
+  line-height: 2rem;
 }
 
 .textInformation {
@@ -70,7 +89,8 @@
   font-size: 0.625rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.75rem;
+  line-height: 1rem;
+  margin-left: 0.5rem;
 }
 
 .form {
@@ -82,6 +102,7 @@
 .inputContainer {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .label {
@@ -90,7 +111,7 @@
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 3.4375rem;
+  line-height: 2.5rem;
 }
 
 .input {
@@ -103,6 +124,16 @@
 .input:focus {
   outline: none;
   border: 2px solid #576702;
+}
+
+.iconUser {
+  position: absolute;
+  margin-left: 5%;
+  margin-top: 19%;
+}
+
+.form input[type="text"] {
+    position: relative;
 }
 
 .button {
@@ -128,7 +159,7 @@
   text-align: end;
 }
 
-.botonConteindo {
+.botonContenido {
   display: flex;
   justify-content: space-between;
 }
@@ -142,6 +173,67 @@
 }
 .linea {
   width: 35%;
-  height: 2px;
+  height: 1px;
   background-color: #000000;
+  margin-top: 1rem;
 }
+
+.pelota {
+  margin-top: 1rem;
+}
+
+.btnGoogle {
+    align-items: center;
+    border-radius: 1.25rem;
+    background: #f3f5f7;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    margin-top: 1rem;
+    border: 1px solid #576702;
+    color: #576702;
+    line-height: 2rem;
+}
+
+.google {
+  margin-right: 0.2rem;
+}
+
+.buttonContainer2 {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.botonContenido2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contenedorParrafo {
+  display: inline-flex;
+  justify-content: space-around;
+  
+}
+
+.parrafoFinal {
+  color: #000;
+    font-family: Inria Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 55px;
+    
+    /* 343.75% */
+}
+
+.spanFinal {
+  color: #4061D1;
+    font-family: Inria Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 55px;
+    margin-left: 0.25rem;
+}
+
+
+
+
