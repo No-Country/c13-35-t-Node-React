@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans&family=Roboto:ital,wght@1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.contenedorPrincipal {
+  display: flex;
+  flex-direction: row;
+  margin-left: 180px;
+  margin-right: 180px;
+  height: calc(100vh - 64px);
+}
+
+.contenedorIzquierda {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    rgba(87, 103, 2, 0.35);
+  width: 33.3%;
+  height: 100%;
+  padding: 2rem;
+}
+
+.contenedorTitle {
+}
+
+.contenedorPelotitas,
+.contenedorPelotitas2 {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.textNumeration {
+  display: flex;
+  width: 1.375rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3.125rem;
+  background: #576702;
+  color: #fff;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 1;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.75rem; /* 280% */
+}
+
+.title {
+  color: #000;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.4375rem;
+}
+
+.textInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.informationModal {
+  color: #191414;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.75rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: #191414;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.4375rem;
+}
+
+.input {
+  align-items: center;
+  border-radius: 1.25rem;
+  background: #f3f5f7;
+  padding: 0.5rem 13.42838rem 0.5rem 1.6875rem;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #576702;
+}
+
+.button {
+  border-radius: 1.25rem;
+  border: 1px solid #576702;
+  background: #576702;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 134.766%;
+  justify-content: space-between;
+  width: 8rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.buttonContainer {
+  margin-top: 1rem;
+  text-align: end;
+}
+
+.botonConteindo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerDeAbajo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.linea {
+  width: 35%;
+  height: 2px;
+  background-color: #000000;
+}

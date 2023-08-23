@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 
 interface RegisterProps {}
 
@@ -8,7 +8,6 @@ const Register: React.FC<RegisterProps> = (props) => {
       <div className="w-26.5 h-39.2 h-screen flex-shrink-0 bg-color-form-bg rgba(87, 103, 2, 0.35) md:w-1/2 lg:w-1/3 ml-20">
         <div className="flex w-14,44 h-5,125 flex-col justify-center flex-shrink-0">
           <h2 className=" text-black font-inria-sans font-semibold text-26 leading-55 font-Inria Sans, sans-serif pl-10 pt-6 pb-10">
-            {/* insertar tipografia correctamente */}
             REGISTRATE
           </h2>
         </div>
@@ -98,6 +97,137 @@ const Register: React.FC<RegisterProps> = (props) => {
       </div>
       <div className="h-screen flex-shrink-0 bg-gray-100 md:w-1/2 lg:w-2/3 mr-20"></div>
     </div>
+  );
+};
+
+export default Register;
+ */
+
+
+import React from "react";
+import styles from "./register.module.css"
+import Image from "next/image";
+
+interface RegisterProps { }
+
+const Register: React.FC<RegisterProps> = (props) => {
+  return (
+    <div className={styles.contenedorPrincipal}>
+      <div className={styles.contenedorIzquierda}>
+        <div className={styles.contenedorTitle}>
+          <h2 className={styles.title}>
+            REGISTRATE
+          </h2>
+        </div>
+        <div className={styles.contenedorPelotitas}>
+          <div className={styles.contenedorPelotitas2}/* "flex justify-around items-center " */>
+            <div className={styles.textInformation}>
+
+              <span className={styles.textNumeration}>1</span>
+              <span className={styles.informationModal}>Informacion</span>
+            </div>
+
+
+            <div className={styles.pelotitaBlanca}><svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+              <circle cx="2.5" cy="3" r="2.5" fill="#F3F5F7" />
+            </svg></div>
+
+            <div className={styles.pelotitaBlanca}><svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+              <circle cx="2.5" cy="3" r="2.5" fill="#F3F5F7" />
+            </svg></div>
+
+            <div className={styles.pelotitaBlanca}><svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+              <circle cx="2.5" cy="3" r="2.5" fill="#F3F5F7" />
+            </svg></div>
+
+            <div className={styles.pelotitaBlanca}><svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+              <circle cx="2.5" cy="3" r="2.5" fill="#F3F5F7" />
+            </svg></div>
+
+            <div className={styles.pelotitaBlanca}><svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+              <circle cx="2.5" cy="3" r="2.5" fill="#F3F5F7" />
+            </svg></div>
+
+            <div className={styles.pelotitaBlanca}><svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+              <circle cx="2.5" cy="3" r="2.5" fill="#F3F5F7" />
+            </svg></div>
+
+            <div className={styles.pelotitaVerde}>
+              <div className={styles.textInformation}>
+                <span className={styles.textNumeration}>2</span>
+                <span className={styles.informationModal}>Perfil</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form className={styles.form}>
+          <div className={styles.inputContainer} >
+            <label
+              htmlFor="nombreYapellido"
+              className={styles.label}
+            >
+              Nombre y Apellido *
+            </label>
+            <input
+              id="nombreYapellido"
+              type="text"
+              className={styles.input}
+
+              placeholder=""
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <label
+              className={styles.label}
+              htmlFor="email"
+            >
+              Email *
+            </label>
+            <input
+              id="email"
+              type="email"
+              className={styles.input}
+
+              placeholder=""
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <label
+              className={styles.label}
+              htmlFor="teléfono"
+            >
+              Teléfono *
+            </label>
+            <input
+              id="telefono"
+              type="number"
+              className={styles.input}
+              placeholder=""
+            />
+          </div>
+        </form>
+        <div className={styles.buttonContainer}>
+          <button className={styles.button}>
+            <div className={styles.botonConteindo}>
+              <div>
+                Siguiente
+              </div>   &gt;
+            </div>
+          </button>
+        </div>
+        <div className={styles.containerDeAbajo} >
+          <div className={styles.linea} ></div>
+          <div >
+            <Image src={"./emojione-monotone_soccer-ball.svg"} width={30} height={30} />
+          </div>
+          <div className={styles.linea} ></div>
+        </div>
+        <button >
+          Continuar con Google
+        </button>
+      </div>
+      <div ></div>
+    </div >
   );
 };
 
