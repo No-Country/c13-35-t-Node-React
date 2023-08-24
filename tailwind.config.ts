@@ -9,7 +9,7 @@ const config: Config = {
     theme: {
         extend: {
             backgroundImage: {
-                banner: "url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MjE3MTU3Ni13aWtpbWVkaWEtaW1hZ2Uta293Z3dtNGYuanBn.jpg')",
+                banner: "url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdXB3azU4ODA1MDQwLXdpa2ltZWRpYS1pbWFnZS1rb3dhd3d6ZS1remVtajVkby5qcGc.jpg')",
             },
             colors: {
                 "color-bg": "#FFFFFF",
