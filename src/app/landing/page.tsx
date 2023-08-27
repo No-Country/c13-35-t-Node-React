@@ -10,6 +10,7 @@ import serviceImage3 from "../assets/services/service3.jpg";
 import profileImage1 from "../assets/profiles/profile1.png";
 import profileImage2 from "../assets/profiles/profile2.png";
 import profileImage3 from "../assets/profiles/profile3.png";
+import FieldModal from "../components/fieldModal/fieldModal";
 
 function Landing(): JSX.Element {
     const faqData = [
@@ -51,6 +52,9 @@ function Landing(): JSX.Element {
 
     return (
         <div className="w-full h-full m-auto text-color-text-black font-inriasans">
+            <div className="bg-red-500 m-20 flex justify-center">
+                <FieldModal />
+            </div>
             <section className="bg-banner py-[150px] bg-no-repeat bg-cover bg-center">
                 <div className="max-w-[1020px] m-auto">
                     <h1 className="text-5xl text-center text-color-text-black font-bold">
