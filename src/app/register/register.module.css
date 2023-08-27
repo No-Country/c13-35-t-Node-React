@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-.contenedorPrincipal {
+/* .contenedorPrincipal {
   display: flex;
   flex-direction: row;
   margin-left: 180px;
@@ -47,7 +47,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 1.5rem;
-  margin-top: 0.8rem; /* 280% */
+  margin-top: 0.8rem; 
   margin-left: 2rem;
 }
 
@@ -65,7 +65,7 @@
   font-weight: 700;
   line-height: 1.5rem;
   margin-top: 0.8rem;
-  /* 280% */
+  
 }
 
 .title {
@@ -221,7 +221,7 @@
     font-weight: 400;
     line-height: 55px;
     
-    /* 343.75% */
+    
 }
 
 .spanFinal {
@@ -232,7 +232,7 @@
     font-weight: 700;
     line-height: 55px;
     margin-left: 0.25rem;
-}
+} */
 
 
 

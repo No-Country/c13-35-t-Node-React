@@ -1,28 +1,34 @@
 import React from "react";
 import styles from "./register.module.css"
 import Image from "next/image";
+import Link from "next/link";
+
 
 interface RegisterProps { }
 
 const Register: React.FC<RegisterProps> = (props) => {
   return (
-    <div className={styles.contenedorPrincipal}>
-      <div className={styles.contenedorIzquierda}>
-        <div className={styles.contenedorTitle}>
-          <h2 className={styles.title}>REGISTRATE</h2>
+    <div className="flex flex-row mx-10 font-inriasans">
+      {/* seccion izquierda (formulario y botones) */}
+      <div className="w-424 h-625 flex-shrink-0 bg-color-form-bg">
+        <div className="flex w-231 h-82 flex-col justify-center flex-shrink-0 bg-blue-500">
+          <h2 className="text-black  font-semibold text-2xl leading-55 mt-7 ml-6">
+            REGISTRATE
+          </h2>
         </div>
-        <div className={styles.contenedorPelotitas}>
-          <div
-            className={
-              styles.contenedorPelotitas2
-            } /* "flex justify-around items-center " */
-          >
-            <div className={styles.textInformation}>
-              <span className={styles.textNumeration1}>1</span>
-              <span className={styles.informationModal}>Información</span>
+        <div className="flex justify-around items-center gap-6 bg-red-700">
+          <div className="flex justify-around items-center gap-2">
+            <div className="flex flex-col items center">
+              <span className="textNumeration1 flex w-6 h-6 justify-center items-center rounded-full bg-color-button text-white  font-semibold text-xs">
+                1
+              </span>
+              <span className="text-black  font-semibold text-[0.625rem] leading-4">
+                Información
+              </span>
             </div>
 
-            <div className={styles.pelotitaBlanca}>
+            {/* pelotitas blancas */}
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="5"
@@ -34,7 +40,7 @@ const Register: React.FC<RegisterProps> = (props) => {
               </svg>
             </div>
 
-            <div className={styles.pelotitaBlanca}>
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="5"
@@ -46,7 +52,7 @@ const Register: React.FC<RegisterProps> = (props) => {
               </svg>
             </div>
 
-            <div className={styles.pelotitaBlanca}>
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="5"
@@ -58,7 +64,7 @@ const Register: React.FC<RegisterProps> = (props) => {
               </svg>
             </div>
 
-            <div className={styles.pelotitaBlanca}>
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="5"
@@ -70,7 +76,7 @@ const Register: React.FC<RegisterProps> = (props) => {
               </svg>
             </div>
 
-            <div className={styles.pelotitaBlanca}>
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="5"
@@ -82,7 +88,7 @@ const Register: React.FC<RegisterProps> = (props) => {
               </svg>
             </div>
 
-            <div className={styles.pelotitaBlanca}>
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="5"
@@ -94,106 +100,122 @@ const Register: React.FC<RegisterProps> = (props) => {
               </svg>
             </div>
 
-            <div className={styles.pelotitaVerde}>
-              <div className={styles.textInformation}>
-                <span className={styles.textNumeration2}>2</span>
-                <span className={styles.informationModal}>Perfil</span>
+            <div>
+              <div className="flex flex-col items-center">
+                <span className="textNumeration1 flex w-6 h-6 justify-center items-center rounded-full bg-white text-black  font-semibold text-xs">
+                  2
+                </span>
+                <span className="text-black  font-semibold text-[0.625rem] leading-4">
+                  Perfil
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <form className={styles.form}>
-          <div className={styles.inputContainer}>
-            <label htmlFor="nombreYapellido" className={styles.label}>
+        <form className="flex flex-col gap-1 mt-2 bg-yellow-500">
+          <div className="flex flex-col">
+            <label
+              htmlFor="nombreYapellido"
+              className="text-black  font-semibold text-base ml-20"
+            >
               Nombre y Apellido *
             </label>
-            <input id="nombreYapellido" type="text" className={styles.input} />
-
-            <Image
-              src={
-                "./4092564-about-mobile-ui-profile-ui-user-website_114033.svg"
-              }
-              alt="iconoUsuario"
-              className={styles.iconUser}
-              width={20}
-              height={20}
+            <input
+              id="nombreYapellido"
+              type="text"
+              className="fflex items-center w-[333.854px] px-[27px] py-0 rounded-[20px] text-gray-700 outline-none border-2 border-color-form-bg focus:border-[#576702]"
             />
           </div>
-          <div className={styles.inputContainer}>
-            <label className={styles.label} htmlFor="email">
+          <div>
+            <label
+              className="text-black  font-semibold text-base leading-10 mx-11"
+              htmlFor="email"
+            >
               Email *
             </label>
-            <input id="email" type="email" className={styles.input} />
-
-            <Image
-              src={"./arroba_icon-icons.com_64607.svg"}
-              alt="iconoCorreo"
-              className={styles.iconUser}
-              width={20}
-              height={20}
+            <input
+              id="email"
+              type="email"
+              className="flex items-center rounded-full mx-auto my-0.5 px-6 py-2  text-gray-700 outline-none border-2 border-color-form-bg focus:border-[#576702]"
             />
           </div>
-          <div className={styles.inputContainer}>
-            <label className={styles.label} htmlFor="teléfono">
+          <div>
+            <label
+              className="text-black  font-semibold text-base leading-10 mx-11"
+              htmlFor="teléfono"
+            >
               Teléfono *
             </label>
-            <input id="telefono" type="number" className={styles.input} />
-
-            <Image
-              src={"./phone_handset_icon_125195.svg"}
-              alt="iconoCorreo"
-              className={styles.iconUser}
-              width={20}
-              height={20}
+            <input
+              id="telefono"
+              type="number"
+              className="flex items-center rounded-full mx-auto my-0.5 px-6 py-2  text-gray-700 outline-none border-2 border-color-form-bg focus:border-[#576702]"
             />
           </div>
         </form>
-        <div className={styles.buttonContainer}>
-          <button className={styles.button}>
-            <div className={styles.botonContenido}>
+        <div className="mt-4 text-right bg-green-500 ">
+          <button className="rounded-full border-2 border-solid border-[#576702] bg-color-button text-white font-roboto text-md font-normal leading-[134.766%]  w-32 py-1.5 px-4 mr-20">
+            <div className="flex justify-between">
               <div>Siguiente</div> &gt;
             </div>
           </button>
         </div>
-        <div className={styles.containerDeAbajo}>
-          <div className={styles.linea}></div>
+        <div
+          className="bg-blue-800 flex flex-row items-center justify-center gap-4
+      "
+        >
+          <div className="w-20 h-0.5 bg-black mt-1"></div>
           <div>
             <Image
               src={"./emojione-monotone_soccer-ball.svg"}
               width={20}
               height={20}
-              className={styles.pelota}
+              className="mt-1"
+              alt={""}
             />
           </div>
-          <div className={styles.linea}></div>
+          <div className="w-20 h-0.5 bg-black mt-1"></div>
         </div>
-
-
-      <div className={styles.buttonContainer2}>
-        <button className={styles.btnGoogle}>
-          <div className={styles.botonContenido2}>
-            <Image
-              src={"./flat-color-icons_google.svg"}
-              width={30}
-              height={30}
-              className={styles.google}
-            />
-            <div>Continuar con Google</div>
-          </div>
+        <div className="mt-4 text-left bg-red-600">
+          <button className="items-center rounded-full bg-white p-2 mt-4 border border-[#576702] text-[#576702] leading-8">
+            <div className="flex content-between">
+              <Image
+                src={"./flat-color-icons_google.svg"}
+                width={30}
+                height={30}
+                className="mr-0.2"
+                alt={""}
+              />
+              <div>Continuar con Google</div>
+            </div>
           </button>
-          <div className={styles.contenedorParrafo}>
-            <p className={styles.parrafoFinal}> ¿Ya tienes una cuenta?
-              <span className={styles.spanFinal}>
-               Inicia sesión
-              </span>
+          <div className="inline-flex justify-around bg-pink-600">
+            <p className="text-black  text-base font-normal leading-13.75">
+              {" "}
+              ¿Ya tienes una cuenta?
+              <Link href="/log-in">
+                <span className="text-blue-500  font-normal text-base leading-14 ml-1">
+                  Inicia sesión
+                </span>
+              </Link>
             </p>
           </div>
-
+        </div>
       </div>
 
-      <div className={styles.contenedorDerecha}></div>
+      {/* seccion derecha (imagen) */}
+
+      <div className="flex bg-gray-100">
+        <div className="bg-lightgray bg-cover bg-center relative">
+          <Image
+            src={"/public/fotoCancha.jpg"}
+            alt="Imagen cancha"
+            width={653}
+            height={625}
+          />
+        </div>
       </div>
-      </div>
+    </div>
   );
 };
 
