@@ -26,7 +26,77 @@ const Register2: React.FC<Register2Props> = (props) => {
             </div>
 
             {/* pelotitas blancas */}
-            <div className="flex flex-row justify-center align-center gap-2">
+            <div className="flex flex-row justify-center mb-3 align-center gap-2">
+              <div className="m-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="6"
+                  viewBox="0 0 5 6"
+                  fill="none"
+                >
+                  <circle cx="2" cy="2" r="2.5" fill="#F3F5F7" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center mb-3 align-center gap-2">
+              <div className="m-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="6"
+                  viewBox="0 0 5 6"
+                  fill="none"
+                >
+                  <circle cx="2" cy="2" r="2.5" fill="#F3F5F7" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center mb-3 align-center gap-2">
+              <div className="m-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="6"
+                  viewBox="0 0 5 6"
+                  fill="none"
+                >
+                  <circle cx="2" cy="2" r="2.5" fill="#F3F5F7" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center mb-3 align-center gap-2">
+              <div className="m-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="6"
+                  viewBox="0 0 5 6"
+                  fill="none"
+                >
+                  <circle cx="2" cy="2" r="2.5" fill="#F3F5F7" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center mb-3 align-center gap-2">
+              <div className="m-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5"
+                  height="6"
+                  viewBox="0 0 5 6"
+                  fill="none"
+                >
+                  <circle cx="2" cy="2" r="2.5" fill="#F3F5F7" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center mb-3 align-center gap-2">
               <div className="m-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
