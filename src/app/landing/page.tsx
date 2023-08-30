@@ -4,9 +4,6 @@ import Image from "next/image";
 import ClientOpinion from "../components/clientOpinionContainer/clientOpinion";
 import Accordion from "../components/accordion/accordion";
 import Select from "react-select";
-import serviceImage1 from "../assets/services/service1.jpg";
-import serviceImage2 from "../assets/services/service2.jpg";
-import serviceImage3 from "../assets/services/service3.jpg";
 import profileImage1 from "../assets/profiles/profile1.png";
 import profileImage2 from "../assets/profiles/profile2.png";
 import profileImage3 from "../assets/profiles/profile3.png";
@@ -53,10 +50,20 @@ function Landing(): JSX.Element {
         <div className="w-full h-full m-auto text-color-text-black font-inriasans">
             <section className="bg-banner py-[150px] bg-no-repeat bg-cover bg-center">
                 <div className="max-w-[1020px] m-auto">
-                    <h1 className="text-5xl text-center text-color-text-black font-bold">
+                    <h1
+                        className="text-5xl text-center text-color-text-white font-bold"
+                        style={{
+                            textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+                        }}
+                    >
                         ¡Reserva Tu Espacio Deportivo y Eleva Tu Juego!
                     </h1>
-                    <p className="text-xl m-auto text-center max-w-2xl justify-center my-20 text-color-text-white">
+                    <p
+                        className="text-xl m-auto text-center max-w-2xl justify-center my-20 text-color-text-white"
+                        style={{
+                            textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+                        }}
+                    >
                         Encuentra, reserva y disfruta de instalaciones
                         deportivas de primera clase en minutos.
                     </p>
@@ -111,27 +118,29 @@ function Landing(): JSX.Element {
                             </li>
                         </ul>
                     </div>
-                    <div className="w-[600px]">
-                        <Image
-                            src={serviceImage1}
-                            alt="This is an image of the service"
-                            width={600}
-                            height={350}
-                            className="bg-red-500"
-                        />
+                    <div className="w-[600px] h-[350px] overflow-hidden relative rounded-md">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <Image
+                                src="https://images.unsplash.com/photo-1517747614396-d21a78b850e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1854&q=80"
+                                alt="This is an image of the service"
+                                width={600}
+                                height={350}
+                                className="rotate-90 origin-center transform"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="flex justify-around my-36">
-                    <div className="w-[600px]">
+                    <div className="w-[600px] h-[350px] overflow-hidden relative rounded-md">
                         <Image
-                            src={serviceImage2}
+                            src="https://images.unsplash.com/photo-1459865264687-595d652de67e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                             alt="This is an image of the service"
                             width={600}
                             height={350}
-                            className="bg-red-500"
+                            className=""
                         />
                     </div>
-                    <div className="w-[600px]">
+                    <div className="w-[600px] ">
                         <h3 className="text-2xl ml-10 my-5 font-bold text-left">
                             Alquiler de Pistas de Tenis
                         </h3>
@@ -177,38 +186,43 @@ function Landing(): JSX.Element {
                             </li>
                         </ul>
                     </div>
-                    <div className="w-[600px]">
+                    <div className="w-[600px] h-[350px] overflow-hidden relative rounded-md">
                         <Image
-                            src={serviceImage3}
+                            src="https://images.pexels.com/photos/8941650/pexels-photo-8941650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             alt="This is an image of the service"
                             width={600}
                             height={350}
-                            className="bg-red-500"
+                            className=""
                         />
                     </div>
                 </div>
             </section>
-            <section className="py-28 bg-color-bg border-color-text-black border-2">
+            <section className="py-28 border-color-text-black border-2 bg-usercomments">
                 <div className="max-w-[1020px] m-auto flex justify-between">
                     <ClientOpinion
                         name="Florence Abbott"
-                        profilePictureSrc={profileImage1}
+                        profilePictureSrc="https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1886&q=80"
                         comment="Increíblemente conveniente. Reservar una cancha de tenis es pan comido ahora. Horarios flexibles y confirmación instantánea hacen que todo sea más fácil."
                     />
                     <ClientOpinion
                         name="Jackson McCormick"
-                        profilePictureSrc={profileImage2}
+                        profilePictureSrc="https://images.pexels.com/photos/6078310/pexels-photo-6078310.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         comment="El sistema de reserva de gimnasios es genial. Encuentro fácilmente un lugar para entrenar, y la opción de espacios privados es perfecta."
                     />
                     <ClientOpinion
                         name="Antonio Douglas"
-                        profilePictureSrc={profileImage3}
+                        profilePictureSrc="https://images.unsplash.com/photo-1555255508-f8259dbe6fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                         comment="¡Finalmente puedo organizar partidos de fútbol sin complicaciones! Reservar canchas es rápido, y la variedad de tamaños me permite elegir según nuestra cantidad de jugadores."
                     />
                 </div>
             </section>
-            <section className="py-28 bg-color-form-bg ">
-                <div className="max-w-[1020px] m-auto">
+            <section
+                className="py-28"
+                style={{
+                    backgroundImage: `url("../assets/FAQ.png")`,
+                }}
+            >
+                <div className="max-w-[1020px] m-auto border-2 border-color-button p-12 bg-white">
                     <h2 className="text-4xl font-bold">FAQs</h2>
                     <div>
                         <div className="my-12">
@@ -223,9 +237,14 @@ function Landing(): JSX.Element {
                     </div>
                 </div>
             </section>
-            <section className="py-28 bg-color-bg">
+            <section className="py-28 bg-color-bg bg-search bg-cover bg-center bg-no-repeat">
                 <div className="max-w-[1020px] m-auto">
-                    <h2 className="text-5xl text-center mb-28 ">
+                    <h2
+                        className="text-5xl text-center mb-28 text-white"
+                        style={{
+                            textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+                        }}
+                    >
                         Encuentra Tu Lugar Perfecto para Jugar
                     </h2>
                     <div className="border-2 rounded-lg m-auto py-2 bg-[#CDCDCD] justify-around flex items-center">
