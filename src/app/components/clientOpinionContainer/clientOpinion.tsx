@@ -3,24 +3,24 @@ import Image, { StaticImageData } from "next/image";
 
 interface ClientOpinionProps {
     name: string;
-    profilePictureSrc: StaticImageData;
+    profilePictureSrc: string;
     comment: string;
 }
 
 const ClientOpinion: React.FC<ClientOpinionProps> = (props) => {
     return (
-        <div className="w-[330px] border-2 h-96 border-color-button p-7 text-color-text-black font-inriasans flex flex-col justify-end">
+        <div className="w-[330px] border-2 h-96 bg-white border-color-button p-7 text-color-text-black font-inriasans flex flex-col justify-end">
             <p className="text-justify flex-grow">
                 <q>{props.comment}</q>
             </p>
-            <div>
+            <div className="rounded-full bg-black my-3 h-[67px] w-[67px] overflow-hidden">
                 {props.profilePictureSrc && (
                     <Image
                         src={props.profilePictureSrc}
                         alt="This is an image of the client"
                         width={67}
                         height={67}
-                        className="rounded-full bg-black my-3"
+                        className="bg-contain bg-center"
                     ></Image>
                 )}
             </div>
