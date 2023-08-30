@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBar from './components/navBar/navBar'
-import Register from './components/register/page'
+import Register from './register/page'
 import Head from 'next/head';
 
 
