@@ -1,15 +1,23 @@
 import React from "react";
+import Image from "next/image";
 
 function Confirmation(): JSX.Element {
     return (
-        <div className="z-0 rounded-full h-[1202px] w-auto bg-color-form-bg flex justify-center m-auto mt-[-200px]">
-            <div className="mt-96">
-                <h1 className="font-inriasans text-color-text-black font-bold text-5xl text-center">
+        <div className="flex flex-row overflow-hidden">
+            <div className="w-[600px] h-full bg-white my-auto">
+                <h2 className="font-bold text-5xl text-center block">
                     ¡Tu reserva ha sido confirmada!
-                </h1>
-                <h3 className="font-inriasans text-color-text-black text-2xl text-center mt-4">
-                    Nos vemos en la cancha
-                </h3>
+                </h2>
+                <h4 className="text-3xl text-center block mt-10">Nos vemos en la cancha</h4>
+            </div>
+            <div className="flex-grow ">
+                <Image
+                    src="https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+                    width={845}
+                    height={1024}
+                    alt="Soccer ball hitting the goal net"
+                    className="w-full h-full object-cover object-center"
+                ></Image>
             </div>
         </div>
     );
