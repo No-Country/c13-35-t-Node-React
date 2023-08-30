@@ -40,3 +40,4 @@ next-env.d.ts
 api.http
 
 /backend/node_modules/
+/backend/.env
