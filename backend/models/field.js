@@ -35,8 +35,8 @@ export class FieldModel {
                     deporte: field.deporte,
                     ciudad: {
                         connectOrCreate: {
-                            where: { ciudad: field.ciudad },
-                            create: { ciudad: field.ciudad }
+                            where: { nombre: field.ciudad },
+                            create: { nombre: field.ciudad }
                         }
                     }
                 }
