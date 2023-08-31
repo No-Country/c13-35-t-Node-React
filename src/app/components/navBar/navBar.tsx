@@ -33,7 +33,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
                             Ingreso
                         </button>
                     </Link>
-                    <Link href="/log-in">
+                    <Link href="/register">
                         <button className="text-color-button bg-white border border-opacity-75  rounded px-8 py-1 border-color-button hover:bg-color-button-hover hover:text-white transition-colors duration-300 uppercase text-lg">
                             Registro
                         </button>
