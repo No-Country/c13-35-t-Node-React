@@ -25,18 +25,19 @@ export class FieldModel {
         return field
     }
 
-    static async createField ({ data }) {
+    static async createField ({ field }) {
+
         try {
             const newField = await prisma.field.create({
                 data: {
-                    nombre: data.nombre,
-                    descripcion: data.descripcion,
-                    precio: data.precio,
-                    deporte: data.deporte,
+                    nombre: field.nombre,
+                    descripcion: field.descripcion,
+                    precio: field.precio,
+                    deporte: field.deporte,
                     ciudad: {
                         connectOrCreate: {
-                            where: { nombre: data.ciudad },
-                            create: { nombre: data.ciudad },
+                            where: { nombre: field.ciudad },
+                            create: { nombre: field.ciudad },
                         },
                     },
                 },
@@ -54,20 +55,20 @@ export class FieldModel {
         }
     }
 
-    static async updateField ({ id, data }) {
+    static async updateField ({ id, field }) {
         try {
             const parsedId = parseInt(id)
             const updatedField = await prisma.field.update({
                 where: {id: parsedId},
                 data: {
-                    nombre: data.nombre,
-                    descripcion: data.descripcion,
-                    precio: data.precio,
-                    deporte: data.deporte,
+                    nombre: field.nombre,
+                    descripcion: field.descripcion,
+                    precio: field.precio,
+                    deporte: field.deporte,
                     ciudad: {
                         update: {
-                            where: { ciudadNombre: data.ciudad },
-                            data: { ciudadNombre: data.ciudad },
+                            where: { nombre: field.ciudad },
+                            data: { nombre: field.ciudad },
                         },
                     },
                 },
