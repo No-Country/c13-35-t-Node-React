@@ -11,25 +11,41 @@ datasource db {
 }
 
 model Ciudad {
-  ciudadId Int @id @default(autoincrement())
-  nombre String @unique
-  fields Field[]
+  ciudadId Int     @id @default(autoincrement())
+  nombre   String  @unique
+  fields   Field[]
 }
 
 model Field {
-  id Int @id @default(autoincrement())
-  nombre String @unique
-  descripcion String @db.VarChar(300)
-  precio Float
-  reservada Boolean @default(false)
-  deporte Deportes
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ciudad Ciudad @relation(fields: [ciudadId], references: [ciudadId])
-  ciudadId Int
+  id          Int      @id @default(autoincrement())
+  nombre      String   @unique
+  descripcion String   @db.VarChar(300)
+  precio      Float
+  reservada   Boolean  @default(false)
+  deporte     Deportes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  ciudad      Ciudad   @relation(fields: [ciudadId], references: [ciudadId])
+  ciudadId    Int
 }
 
 enum Deportes {
   futbol
   tenis
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  phone    String
+  username String?
+  password String
+  role     UserRole @default(Client)
+}
+
+enum UserRole {
+  Client
+  Owner
+  Admin
 }
