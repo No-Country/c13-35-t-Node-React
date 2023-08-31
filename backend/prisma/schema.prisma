@@ -12,7 +12,7 @@ datasource db {
 
 model Ciudad {
   ciudadId Int @id @default(autoincrement())
-  nombre String
+  nombre String @unique
   fields Field[]
 }
 

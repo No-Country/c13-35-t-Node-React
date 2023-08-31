@@ -25,21 +25,21 @@ export class FieldModel {
         return field
     }
 
-    static async createField ({ field }) {
+    static async createField ({ data }) {
         try {
             const newField = await prisma.field.create({
                 data: {
-                    nombre: field.nombre,
-                    descripcion: field.descripcion,
-                    precio: field.precio,
-                    deporte: field.deporte,
+                    nombre: data.nombre,
+                    descripcion: data.descripcion,
+                    precio: data.precio,
+                    deporte: data.deporte,
                     ciudad: {
                         connectOrCreate: {
-                            where: { nombre: field.ciudad },
-                            create: { nombre: field.ciudad }
-                        }
-                    }
-                }
+                            where: { nombre: data.ciudad },
+                            create: { nombre: data.ciudad },
+                        },
+                    },
+                },
             })
     
             return newField
@@ -54,23 +54,23 @@ export class FieldModel {
         }
     }
 
-    static async updateField ({ id, field }) {
+    static async updateField ({ id, data }) {
         try {
             const parsedId = parseInt(id)
             const updatedField = await prisma.field.update({
                 where: {id: parsedId},
                 data: {
-                    nombre: field.nombre,
-                    descripcion: field.descripcion,
-                    precio: field.precio,
-                    deporte: field.deporte,
+                    nombre: data.nombre,
+                    descripcion: data.descripcion,
+                    precio: data.precio,
+                    deporte: data.deporte,
                     ciudad: {
                         update: {
-                            where: { ciudadNombre: field.ciudad },
-                            data: { ciudadNombre: field.ciudad }
-                        }
-                    }
-                }
+                            where: { ciudadNombre: data.ciudad },
+                            data: { ciudadNombre: data.ciudad },
+                        },
+                    },
+                },
             })
     
             return updatedField
