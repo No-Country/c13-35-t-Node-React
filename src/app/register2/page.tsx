@@ -1,15 +1,22 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import emailjs from "@emailjs/browser";
 
 interface Register2Props {}
 
 const Register2: React.FC<Register2Props> = (props) => {
   const router = useRouter(); //Agregado
+
+  const [showPasswordRules, setShowPasswordRules] = useState(false);
+
+  const togglePasswordRules = () => {
+    setShowPasswordRules(!showPasswordRules);
+  };
 
   const form = useRef<HTMLFormElement>(null);
   const {
@@ -24,7 +31,27 @@ const Register2: React.FC<Register2Props> = (props) => {
     },
   });
 
+  const sendEmail = () => {
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_703t9cg",
+          "template_ya20m5f",
+          form.current,
+          "l5gbij0EO5KK0gFQX"
+        )
+        .then((result) => {
+          console.log(result.text);
+        })
+        .catch((error) => {
+          console.log(error.text);
+        });
+    }
+  };
+
   const onSubmit = () => {
+    sendEmail();
+
     router.push("/log-in");
   };
 
@@ -192,109 +219,114 @@ const Register2: React.FC<Register2Props> = (props) => {
             )}
           </div>
 
-
-
           <div className="">
-  <label
-    className="text-black text-left font-semibold text-base my-5"
-    htmlFor="contraseña"
-  >
-    Contraseña *
-  </label>
-  <input
-    id="contraseña"
-    type="password"
-    {...register("contraseña", {
-      required: true,
-      minLength: 6,
-      maxLength: 10,
-      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-    })}
-    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
-      errors.contraseña ? "border-red-700" : ""
-    }`}
-  />
+            <label
+              className="text-black text-left font-semibold text-base my-5"
+              htmlFor="contraseña"
+            >
+              Contraseña *
+            </label>
+            <input
+              id="contraseña"
+              type="password"
+              {...register("contraseña", {
+                required: true,
+                minLength: 6,
+                maxLength: 10,
+                pattern:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+              })}
+              className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
+                errors.contraseña ? "border-red-700" : ""
+              }`}
+              onClick={togglePasswordRules}
+            />
+            {showPasswordRules && (
+              <div className="tooltip text-xs">
+                - Entre 6 y 10 caracteres. <br />
+                - Al menos una mayúscula. <br />
+                - Al menos una minúscula. <br />
+                - Al menos un número. <br />- Al menos un caracter especial.
+                Listado aceptado: ! # $ % & ( ) * + - /? @ [ \ ] ^ _ [ | ].
+              </div>
+            )}
 
-  {errors.contraseña?.type === "minLength" && (
-    <p className="text-red-700">
-      La contraseña debe tener al menos 6 caracteres
-    </p>
-  )}
-  {errors.contraseña?.type === "maxLength" && (
-    <p className="text-red-700">
-      La contraseña debe tener menos de 10 caracteres
-    </p>
-  )}
-  {errors.contraseña?.type === "pattern" && (
-    <p className="text-red-700">
-      La contraseña no cumple con las reglas. Por favor, ingrese una contraseña correcta.
-    </p>
-  )}
-  {errors.contraseña?.type === "required" && (
-    <p className="text-red-700">
-      Falta completar la contraseña
-    </p>
-  )}
-</div>
+            {errors.contraseña?.type === "minLength" && (
+              <p className="text-red-700">
+                La contraseña debe tener al menos 6 caracteres
+              </p>
+            )}
+            {errors.contraseña?.type === "maxLength" && (
+              <p className="text-red-700">
+                La contraseña debe tener menos de 10 caracteres
+              </p>
+            )}
+            {errors.contraseña?.type === "pattern" && (
+              <p className="text-red-700">
+                La contraseña no cumple con las reglas. Por favor, ingrese una
+                contraseña correcta.
+              </p>
+            )}
+            {errors.contraseña?.type === "required" && (
+              <p className="text-red-700">Falta completar la contraseña</p>
+            )}
+          </div>
 
+          <div>
+            <label
+              className="text-black text-left font-semibold text-base my-5"
+              htmlFor="confirmarContraseña"
+            >
+              Confirmar Contraseña *
+            </label>
+            <input
+              id="confirmarContraseña"
+              type="password"
+              {...register("contraseña", {
+                required: true,
+                minLength: 6,
+                maxLength: 10,
+                pattern:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+              })}
+              className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
+                errors.confirmarContraseña ? "border-red-700" : ""
+              }`}
+            />
 
-<div>
-  <label
-    className="text-black text-left font-semibold text-base my-5"
-    htmlFor="confirmarContraseña"
-  >
-    Confirmar Contraseña *
-  </label>
-  <input
-    id="confirmarContraseña"
-    type="password"
-    {...register("contraseña", {
-      required: true,
-      minLength: 6,
-      maxLength: 10,
-      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-    })}
-    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
-      errors.confirmarContraseña ? "border-red-700" : ""
-    }`}
-  />
+            {errors.confirmarContraseña?.type === "minLength" && (
+              <p className="text-red-700">
+                La contraseña debe tener al menos 6 caracteres
+              </p>
+            )}
+            {errors.confirmarContraseña?.type === "maxLength" && (
+              <p className="text-red-700">
+                La contraseña debe tener menos de 10 caracteres
+              </p>
+            )}
+            {errors.confirmarContraseña?.type === "pattern" && (
+              <p className="text-red-700">
+                La contraseña no cumple con las reglas. Por favor, ingrese una
+                contraseña correcta.
+              </p>
+            )}
+            {errors.confirmarContraseña?.type === "validate" && (
+              <p className="text-red-700">
+                La contraseña no coincide. Por favor, reingrese la contraseña.
+              </p>
+            )}
+            {errors.confirmarContraseña?.type === "required" && (
+              <p className="text-red-700">Falta confirmar la contraseña</p>
+            )}
+          </div>
 
-  {errors.confirmarContraseña?.type === "minLength" && (
-    <p className="text-red-700">
-      La contraseña debe tener al menos 6 caracteres
-    </p>
-  )}
-  {errors.confirmarContraseña?.type === "maxLength" && (
-    <p className="text-red-700">
-      La contraseña debe tener menos de 10 caracteres
-    </p>
-  )}
-  {errors.confirmarContraseña?.type === "pattern" && (
-    <p className="text-red-700">
-      La contraseña no cumple con las reglas. Por favor, ingrese una contraseña correcta.
-    </p>
-  )}
-  {errors.confirmarContraseña?.type === "validate" && (
-    <p className="text-red-700">
-      La contraseña no coincide. Por favor, reingrese la contraseña.
-    </p>
-  )}
-  {errors.confirmarContraseña?.type === "required" && (
-    <p className="text-red-700">
-      Falta confirmar la contraseña
-    </p>
-  )}
-</div>
-
-
-
-        <div className="mt-4 text-right">
-          <button className="rounded-full w-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal py-2 px-4 my-1">
-            Registrate
-          </button>
-        </div>
+          <div className="mt-4 text-right">
+            <button className="rounded-full w-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal py-2 px-4 my-1">
+              Registrate
+            </button>
+          </div>
         </form>
-        
+
         <div className="flex flex-row items-center justify-center gap-4 my-2">
           <div className="h-0.5 bg-black mt-1 w-full"></div>
           <div>
@@ -340,10 +372,11 @@ const Register2: React.FC<Register2Props> = (props) => {
       <div className="flex bg-gray-100">
         <div className="bg-lightgray bg-cover bg-center relative">
           <Image
-            src={"/public/fotoCancha.jpg"}
+            src={"/fotoCancha.jpg"}
             alt="Imagen cancha"
             width={653}
             height={625}
+            priority
           />
         </div>
       </div>
