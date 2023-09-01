@@ -1,10 +1,33 @@
-import React from "react";
+"use client";
+
+import { useForm } from "react-hook-form";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Register2Props {}
 
 const Register2: React.FC<Register2Props> = (props) => {
+  const router = useRouter(); //Agregado
+
+  const form = useRef<HTMLFormElement>(null);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      usuario: "",
+      contraseña: "",
+      confirmarContraseña: "",
+    },
+  });
+
+  const onSubmit = () => {
+    router.push("/log-in");
+  };
+
   return (
     <div className="flex flex-row mx-44 font-inriasans h-full justify-center">
       {/* seccion izquierda (formulario y botones) */}
@@ -122,7 +145,12 @@ const Register2: React.FC<Register2Props> = (props) => {
             </div>
           </div>
         </div>
-        <form className="flex flex-col gap-1 mt-5">
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          ref={form}
+          className="flex flex-col gap-1 mt-5"
+        >
           <div className="">
             <label
               htmlFor="usuario"
@@ -133,44 +161,140 @@ const Register2: React.FC<Register2Props> = (props) => {
             <input
               id="usuario"
               type="text"
-              className="flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none  focus:border-black"
-              required
+              {...register("usuario", {
+                required: true,
+                minLength: 3,
+                maxLength: 20,
+                pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ0-9\s\-']+$/,
+              })}
+              className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
+                errors.usuario ? "border-red-700" : ""
+              }`}
             />
+
+            {errors.usuario?.type === "minLength" && (
+              <p className="text-red-700">
+                El campo debe tener al menos 3 caracteres
+              </p>
+            )}
+            {errors.usuario?.type === "maxLength" && (
+              <p className="text-red-700">
+                El campo debe tener menos de 20 caracteres
+              </p>
+            )}
+            {errors.usuario?.type === "pattern" && (
+              <p className="text-red-700">
+                El usuario es incorrecto. Por favor, reingréselo.
+              </p>
+            )}
+            {errors.usuario?.type === "required" && (
+              <p className="text-red-700">Falta completar el usuario</p>
+            )}
           </div>
-          <div>
-            <label
-              className="text-black text-left font-semibold text-base my-5"
-              htmlFor="contraseña"
-            >
-              Contraseña *
-            </label>
-            <input
-              id="contraseña"
-              type="password"
-              className="flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black"
-              required
-            />
-          </div>
-          <div>
-            <label
-              className="text-black text-left font-semibold text-base my-5"
-              htmlFor="confirmarContraseña"
-            >
-              Confirmar Contraseña *
-            </label>
-            <input
-              id="confirmarContraseña"
-              type="password"
-              className="flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black"
-              required
-            />
-          </div>
-        </form>
+
+
+
+          <div className="">
+  <label
+    className="text-black text-left font-semibold text-base my-5"
+    htmlFor="contraseña"
+  >
+    Contraseña *
+  </label>
+  <input
+    id="contraseña"
+    type="password"
+    {...register("contraseña", {
+      required: true,
+      minLength: 6,
+      maxLength: 10,
+      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+    })}
+    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
+      errors.contraseña ? "border-red-700" : ""
+    }`}
+  />
+
+  {errors.contraseña?.type === "minLength" && (
+    <p className="text-red-700">
+      La contraseña debe tener al menos 6 caracteres
+    </p>
+  )}
+  {errors.contraseña?.type === "maxLength" && (
+    <p className="text-red-700">
+      La contraseña debe tener menos de 10 caracteres
+    </p>
+  )}
+  {errors.contraseña?.type === "pattern" && (
+    <p className="text-red-700">
+      La contraseña no cumple con las reglas. Por favor, ingrese una contraseña correcta.
+    </p>
+  )}
+  {errors.contraseña?.type === "required" && (
+    <p className="text-red-700">
+      Falta completar la contraseña
+    </p>
+  )}
+</div>
+
+
+<div>
+  <label
+    className="text-black text-left font-semibold text-base my-5"
+    htmlFor="confirmarContraseña"
+  >
+    Confirmar Contraseña *
+  </label>
+  <input
+    id="confirmarContraseña"
+    type="password"
+    {...register("contraseña", {
+      required: true,
+      minLength: 6,
+      maxLength: 10,
+      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+    })}
+    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
+      errors.confirmarContraseña ? "border-red-700" : ""
+    }`}
+  />
+
+  {errors.confirmarContraseña?.type === "minLength" && (
+    <p className="text-red-700">
+      La contraseña debe tener al menos 6 caracteres
+    </p>
+  )}
+  {errors.confirmarContraseña?.type === "maxLength" && (
+    <p className="text-red-700">
+      La contraseña debe tener menos de 10 caracteres
+    </p>
+  )}
+  {errors.confirmarContraseña?.type === "pattern" && (
+    <p className="text-red-700">
+      La contraseña no cumple con las reglas. Por favor, ingrese una contraseña correcta.
+    </p>
+  )}
+  {errors.confirmarContraseña?.type === "validate" && (
+    <p className="text-red-700">
+      La contraseña no coincide. Por favor, reingrese la contraseña.
+    </p>
+  )}
+  {errors.confirmarContraseña?.type === "required" && (
+    <p className="text-red-700">
+      Falta confirmar la contraseña
+    </p>
+  )}
+</div>
+
+
+
         <div className="mt-4 text-right">
           <button className="rounded-full w-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal py-2 px-4 my-1">
             Registrate
           </button>
         </div>
+        </form>
+        
         <div className="flex flex-row items-center justify-center gap-4 my-2">
           <div className="h-0.5 bg-black mt-1 w-full"></div>
           <div>

@@ -1,46 +1,32 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = (props) => {
+  const router = useRouter(); //Agregado
 
-    const [copied, setCopied] = useState(false);
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const form = useRef<HTMLFormElement>(null);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      nombreYapellido: "",
+      email: "",
+      telefono: "",
+    },
+  });
 
-    const form = useRef();
-    const {
-      register,
-      formState: { errors },
-      handleSubmit,
-    } = useForm({
-      defaultValues: {
-        nombreYapellido: "",
-        email: "",
-        telefono: "",
-      },
-    });
-  
-  const handleCopy = (e) => {
-    e.preventDefault();
-    setCopied(true);
+  const onSubmit = () => {
+    router.push("/register2");
   };
-
-  const handlePaste = (e) => {
-    if (copied) {
-      e.preventDefault();
-      alert("No se permite copiar y pegar en este campo.");
-    }
-  };
-
-const onSubmit = (data) => {
-  // sendEmail(data);
-  console.log(data);
-};
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const phonePattern = /^[0-9]*$/;
@@ -162,8 +148,10 @@ const onSubmit = (data) => {
             </div>
           </div>
         </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
+          ref={form}
           className="flex flex-col gap-1 mt-5"
         >
           <div>
@@ -176,18 +164,16 @@ const onSubmit = (data) => {
             <input
               type="text"
               id="nombreYapellido"
-              // name="nombreYapellido"
               {...register("nombreYapellido", {
                 required: true,
                 minLength: 3,
                 maxLength: 30,
                 pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ\s\-']+$/,
               })}
-              className={`lex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none  focus:border-black ${
+              onPaste={(e) => e.preventDefault()} // Evita que se pueda pegar
+              className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
                 errors.nombreYapellido ? "border-red-700" : ""
               }`}
-              onCopy={handleCopy}
-              onPaste={handlePaste}
             />
 
             {errors.nombreYapellido?.type === "minLength" && (
@@ -252,7 +238,7 @@ const onSubmit = (data) => {
             </label>
             <input
               id="telefono"
-              type="number"
+              type="tel"
               {...register("telefono", {
                 required: true,
                 pattern: phonePattern,
@@ -262,7 +248,7 @@ const onSubmit = (data) => {
                 errors.telefono ? "border-red-700" : ""
               }`}
             />
-           {errors.telefono?.type === "required" && (
+            {errors.telefono?.type === "required" && (
               <p className="text-red-500" style={{ color: "#B40000" }}>
                 Falta completar el teléfono
               </p>
@@ -274,16 +260,22 @@ const onSubmit = (data) => {
             )}
           </div>
 
-        </form>
-        <Link href="/register2">
           <div className="mt-4 text-right">
-            <button className="rounded-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal w-32 py-2 px-4 my-1">
+            <button
+              className={`rounded-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal w-32 py-2 px-4 my-1 ${
+                Object.keys(errors).length > 0
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }`}
+              disabled={Object.keys(errors).length > 0}
+            >
               <div className="flex justify-between">
                 <p>Siguiente</p> &gt;
               </div>
             </button>
           </div>
-        </Link>
+        </form>
+
         <div className="flex flex-row items-center justify-center gap-4 my-2">
           <div className="h-0.5 bg-black mt-1 w-full"></div>
           <div>
