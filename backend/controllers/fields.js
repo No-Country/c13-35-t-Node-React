@@ -1,10 +1,19 @@
 import { FieldModel } from "../models/field.js";
-import { validateField, validateFieldUpdate } from "../validation-squemas/field.js";
+import { validateField, validateFieldUpdate, validateSports } from "../validation-squemas/field.js";
 
 export class FieldController {
     static async getAllFields (req, res)  {
         const { deporte, ciudad } = req.query
-        const fields = await FieldModel.getAllFields({ deporte })
+
+        if (deporte) {
+            const result = await validateSports(deporte)
+            console.log(result)
+            if (result.error) {
+                return res.status(400).json({error: JSON.parse(result.error.message)})
+            }
+        }
+
+        const fields = await FieldModel.getAllFields({ deporte, ciudad })
     
         if (!fields) return res.status(404).json({message: "No hay canchas para mostrar"})
         res.status(200).json(fields)

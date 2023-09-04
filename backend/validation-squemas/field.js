@@ -1,4 +1,5 @@
 import z from "zod";
+import { Deportes } from "@prisma/client";
 
 const fieldSquema = z.object({
     nombre: z.string({
@@ -7,8 +8,11 @@ const fieldSquema = z.object({
     }).nonempty({message: "El nombre es requerido"}),
     descripcion: z.string(),
     precio: z.number().positive(),
-    deporte: z.enum(["futbol", "tenis"]),
-    ciudad: z.string({required_error: "La ciudad es requerida"})
+    deporte: z.enum(["futbol", "tenis", "basquet"]),
+    ciudad: z.string({required_error: "La ciudad es requerida"}),
+    valoracion: z.number().positive().max(5),
+    url: z.string(),
+    servicios: z.array()
 })
 
 function validateField(object) {
@@ -19,4 +23,11 @@ function validateFieldUpdate(object) {
     return fieldSquema.partial().safeParseAsync(object)
 }
 
-export { validateField, validateFieldUpdate };
+const sports = Object.keys(Deportes);
+const sportsEnum = z.enum(sports);
+
+function validateSports(object) {
+    return sportsEnum.safeParseAsync(object)
+}
+
+export { validateField, validateFieldUpdate, validateSports };

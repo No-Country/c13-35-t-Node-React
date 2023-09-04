@@ -2,16 +2,67 @@ import { prisma } from "../controllers/prisma-controller.js"
 import { Prisma } from "@prisma/client";
 
 export class FieldModel {
-    static async getAllFields ({ deporte }) {
-        if (deporte) {
+    static async getAllFields ({ deporte, ciudad }) {
+
+        if (ciudad && !deporte) {
+            const cityToFind = await prisma.ciudad.findFirst({
+                where: { nombre: ciudad }
+            })
+
+            if (!cityToFind) {
+                return ({message: "Ciudad no encontrada"})
+            }
+
+            const fields = await prisma.field.findMany({
+                where: {
+                    ciudad: { ciudadId: cityToFind.ciudadId }
+                },
+                include: { ciudad: true }
+            })
+
+            return fields
+        }
+
+
+        if (deporte && !ciudad) {
+
             const fields = await prisma.field.findMany({
                 where: {deporte: deporte.toLocaleLowerCase()}
             })
             
             return fields
         }
+
+        if (ciudad && deporte) {
+            const cityToFind = await prisma.ciudad.findFirst({
+                where: { nombre: ciudad }
+            })
+
+            if (!cityToFind) {
+                return ({message: "Ciudad no encontrada"})
+            }
+
+            const fields = await prisma.field.findMany({
+                where: {
+                    AND: [
+                        { deporte: deporte.toLocaleLowerCase()},
+                        {ciudad: {
+                            ciudadId: cityToFind.ciudadId
+                        },
+                    },
+                    ]
+                },
+                include: {
+                    ciudad: true
+                }
+            })
+
+            return fields
+        }
     
-        const fields = await prisma.field.findMany()
+        const fields = await prisma.field.findMany({
+            include: { ciudad: true }
+        })
         
         return fields
     }
@@ -41,6 +92,9 @@ export class FieldModel {
                         descripcion: field.descripcion,
                         precio: field.precio,
                         deporte: field.deporte,
+                        valoracion: field.valoracion,
+                        url: field.url,
+                        servicios: field.servicios,
                         ciudad: {
                             connect: {
                                 ciudadId: ciudad.ciudadId
@@ -57,6 +111,9 @@ export class FieldModel {
                         descripcion: field.descripcion,
                         precio: field.precio,
                         deporte: field.deporte,
+                        valoracion: field.valoracion,
+                        url: field.url,
+                        servicios: field.servicios,
                         ciudad: {
                             create: {
                                 nombre: field.ciudad
@@ -88,6 +145,9 @@ export class FieldModel {
                     descripcion: field.descripcion,
                     precio: field.precio,
                     deporte: field.deporte,
+                    valoracion: field.valoracion,
+                    url: field.url,
+                    servicios: field.servicios,
                     ciudad: {
                         update: {
                             where: { nombre: field.ciudad },
