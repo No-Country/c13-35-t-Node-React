@@ -22,7 +22,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
                     </Link>
                 </div>
                 <div className="flex gap-2">
-                    <Link href="/log-in">
+                    <Link href="/login">
                         <button className="text-white font-inria text-base font-medium bg-opacity-75 bg-[#576702] rounded px-8 py-1 border border-opacity-0 border-[#576702] hover:bg-[#3f4a05] transition-colors duration-300 border:transparent" >Ingreso</button>
                     </Link>
                     <Link href="/register">
