@@ -78,6 +78,8 @@ export class FieldModel {
 
     static async createField ({ field }) {
 
+        console.log(field)
+
         try {
 
             const ciudad = await prisma.ciudad.findFirst({

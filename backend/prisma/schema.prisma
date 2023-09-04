@@ -23,13 +23,13 @@ model Field {
   precio      Float
   reservada   Boolean  @default(false)
   deporte     Deportes
+  valoracion  Float    @default(0)
+  url         String
+  servicios   String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   ciudad      Ciudad   @relation(fields: [ciudadId], references: [ciudadId])
   ciudadId    Int
-  valoracion  Float    @default(0)
-  url         String
-  servicios   String[]
 }
 
 enum Deportes {
