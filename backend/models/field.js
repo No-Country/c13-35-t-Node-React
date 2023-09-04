@@ -82,31 +82,34 @@ export class FieldModel {
 
         try {
 
-            const ciudad = await prisma.ciudad.findFirst({
+            /* const ciudad = await prisma.ciudad.findFirst({
                 where: {nombre: field.ciudad}
-            })
+            }) */
 
-            if (ciudad) {
-
-                const newField = await prisma.field.create({
-                    data: {
-                        nombre: field.nombre,
-                        descripcion: field.descripcion,
-                        precio: field.precio,
-                        deporte: field.deporte,
-                        valoracion: field.valoracion,
-                        url: field.url,
-                        servicios: field.servicios,
-                        ciudad: {
-                            connect: {
-                                ciudadId: ciudad.ciudadId
+            const newField = await prisma.field.create({
+                data: {
+                    nombre: field.nombre,
+                    descripcion: field.descripcion,
+                    precio: field.precio,
+                    deporte: field.deporte,
+                    valoracion: field.valoracion,
+                    url: field.url,
+                    servicios: field.servicios,
+                    ciudad: {
+                        connectOrCreate: {
+                            where: {
+                                nombre: field.ciudad
+                            },
+                            create: {
+                                nombre: field.ciudad
                             }
-                        },
+                        }
                     },
-                })
-        
-                return newField
-            } else {
+                },
+            })
+    
+            return newField
+             /* else {
                 const newField = await prisma.field.create({
                     data: {
                         nombre: field.nombre,
@@ -125,7 +128,7 @@ export class FieldModel {
                 })
         
                 return newField
-            }
+            } */
     
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
