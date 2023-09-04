@@ -12,7 +12,7 @@ const fieldSquema = z.object({
     ciudad: z.string({required_error: "La ciudad es requerida"}),
     valoracion: z.number().positive().max(5),
     url: z.string(),
-    servicios: z.array()
+    servicios: z.array(z.string())
 })
 
 const sports = Object.keys(Deportes);
