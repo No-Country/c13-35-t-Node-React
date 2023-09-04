@@ -15,6 +15,9 @@ const fieldSquema = z.object({
     servicios: z.array()
 })
 
+const sports = Object.keys(Deportes);
+const sportsEnum = z.enum(sports);
+
 function validateField(object) {
     return fieldSquema.safeParseAsync(object)
 }
@@ -22,9 +25,6 @@ function validateField(object) {
 function validateFieldUpdate(object) {
     return fieldSquema.partial().safeParseAsync(object)
 }
-
-const sports = Object.keys(Deportes);
-const sportsEnum = z.enum(sports);
 
 function validateSports(object) {
     return sportsEnum.safeParseAsync(object)
