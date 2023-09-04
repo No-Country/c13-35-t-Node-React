@@ -29,6 +29,8 @@ export class FieldController {
     }
 
     static async createField (req, res) {
+
+        console.log(req.body)
         const result = await validateField(req.body)
     
         if (result.error) {
