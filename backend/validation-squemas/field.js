@@ -10,7 +10,7 @@ const fieldSquema = z.object({
     precio: z.number().positive(),
     deporte: z.enum(["futbol", "tenis", "basquet"]),
     ciudad: z.string({required_error: "La ciudad es requerida"}),
-    valoracion: z.number().positive().max(5),
+    valoracion: z.number().positive().max(5, "La valoración no puede ser mayor a 5"),
     url: z.string(),
     servicios: z.array(z.string())
 })

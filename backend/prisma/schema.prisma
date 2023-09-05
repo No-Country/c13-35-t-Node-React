@@ -19,11 +19,11 @@ model Ciudad {
 model Field {
   id          Int      @id @default(autoincrement())
   nombre      String   @unique
-  descripcion String   @db.VarChar(300)
+  descripcion String?   @db.VarChar(300)
   precio      Float
   reservada   Boolean  @default(false)
   deporte     Deportes
-  valoracion  Float    @default(0)
+  valoracion  Float?
   url         String
   servicios   String[]
   createdAt   DateTime @default(now())
