@@ -144,7 +144,7 @@ function AboutPage() {
                     </div>
                 </div>                
                 
-                <p className="text-justify mt-2">Lorem ipsum dolor sit amet  consectetur adipisicing elit consectetur adipisicing eli. Eligendi ducimus perferendis assumenda eos numquam porro culpa nisi odio</p>
+                <p className="text-justify mt-2">Desarrolladora Full Stack (React.js, Javascript, Java, HTML, CSS, SQL).</p>
               </div>
               <div className="w-1/2 flex justify-center">
                 <img src="../../assets/giuliana.jpg" alt="giuliana"  className="h-80 w-80 rounded-full border border-blue-800"/>
