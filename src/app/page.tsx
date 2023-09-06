@@ -1,9 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import Image from "next/image";
-import Select from "react-select";
+import Select, {
+    components,
+    SingleValueProps,
+    OptionProps,
+} from "react-select";
 import ClientOpinion from "./components/clientOpinionContainer/clientOpinion";
 import Accordion from "./components/accordion/accordion";
+import { FaLocationDot, FaCalendarDays } from "react-icons/fa6";
+
+const CustomOption: React.FC<OptionProps<any>> = ({ innerProps, label }) => (
+    <div className="m-3" {...innerProps}>
+        {label}
+    </div>
+);
+
+const CustomSingleValue: React.FC<SingleValueProps<any>> = ({
+    children,
+    ...props
+}) => (
+    <components.SingleValue {...props}>
+        <div className="inline-flex justify-start items-center">
+            <FaLocationDot className="mr-2 text-color-button text-xl" />
+            {children}
+        </div>
+    </components.SingleValue>
+);
+
+type CityOption = {
+    value: string;
+    label: string;
+};
 
 export default function Home() {
     const faqData = [
@@ -26,9 +54,9 @@ export default function Home() {
         },
     ];
 
-    const [city, setCity] = useState([]);
+    const [selectedCity, setSelectedCity] = React.useState<CityOption | null>(null);
 
-    const optionsCities = [
+    const optionsCities: CityOption[] = [
         { value: "Medellin", label: "Medellin" },
         { value: "Itagui", label: "Itagui" },
         { value: "Rionegro", label: "Rionegro" },
@@ -36,12 +64,14 @@ export default function Home() {
         { value: "Belen", label: "Belen" },
     ];
 
-    const handleCityChange = async (
-        selected: React.SetStateAction<never[]>
-    ) => {
-        // const { action } = selectaction;
-        setCity(selected);
+    const handleChange = (selectedOption: CityOption | null) => {
+        setSelectedCity(selectedOption);
     };
+
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        event.target.type = "date";
+    };
+
     return (
         <div className="w-full h-full m-auto text-color-text-black font-inriasans">
             <section className="bg-banner py-[150px] bg-no-repeat bg-cover bg-center">
@@ -63,31 +93,48 @@ export default function Home() {
                         Encuentra, reserva y disfruta de instalaciones
                         deportivas de primera clase en minutos.
                     </p>
-                    <div className="border-2 rounded-lg m-auto py-2 bg-[#CDCDCD] justify-around flex items-center">
+                    <div className="border-2 rounded-lg m-auto p-0 bg-[#CDCDCD] justify-around flex items-center">
                         <Select
                             id="selectCity"
                             instanceId="selectCity"
-                            isMulti
                             name="colors"
                             className="rounded-lg p-3 text-base w-[450px] font-inriasans"
                             classNamePrefix="select"
                             options={optionsCities}
-                            placeholder="Ubicación"
+                            placeholder={
+                                <div className="inline-flex justify-start items-center">
+                                    <FaLocationDot className="mr-2 text-color-button text-xl" />
+                                    Ubicación
+                                </div>
+                            }
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
                                     minHeight: "2.75rem",
                                 }),
                             }}
+                            value={selectedCity}
+                            onChange={handleChange}
+                            components={{
+                                Option: CustomOption,
+                                SingleValue: CustomSingleValue,
+                            }}
                         />
-                        <input
-                            type="date"
-                            placeholder="Fecha"
-                            className="rounded-lg p-2 text-base h-12 w-80"
-                        />
+
+                        <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
+                            <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
+                            <input
+                                type="text"
+                                id="dateInput"
+                                name="date"
+                                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
+                                onFocus={handleFocus}
+                                placeholder="Fecha"
+                            />
+                        </div>
                         <input
                             type="button"
-                            value="Buscar"
+                            value="BUSCAR"
                             className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
                         />
                     </div>
@@ -213,7 +260,7 @@ export default function Home() {
                 </div>
             </section>
             <section
-                className="py-28"
+                className="py-28 bg-center bg-cover "
                 style={{
                     backgroundImage: `url("../assets/FAQ.png")`,
                 }}
@@ -243,31 +290,48 @@ export default function Home() {
                     >
                         Encuentra Tu Lugar Perfecto para Jugar
                     </h2>
-                    <div className="border-2 rounded-lg m-auto py-2 bg-[#CDCDCD] justify-around flex items-center">
+                    <div className="border-2 rounded-lg m-auto p-0 bg-[#CDCDCD] justify-around flex items-center">
                         <Select
                             id="selectCity"
                             instanceId="selectCity"
-                            isMulti
                             name="colors"
-                            className="rounded-lg p-2 text-base w-[450px] font-inriasans"
+                            className="rounded-lg p-3 text-base w-[450px] font-inriasans"
                             classNamePrefix="select"
                             options={optionsCities}
-                            placeholder="Ubicación"
+                            placeholder={
+                                <div className="inline-flex justify-start items-center">
+                                    <FaLocationDot className="mr-2 text-color-button text-xl" />
+                                    Ubicación
+                                </div>
+                            }
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
                                     minHeight: "2.75rem",
                                 }),
                             }}
+                            value={selectedCity}
+                            onChange={handleChange}
+                            components={{
+                                Option: CustomOption,
+                                SingleValue: CustomSingleValue,
+                            }}
                         />
+
+                        <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
+                            <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
+                            <input
+                                type="text"
+                                id="dateInput"
+                                name="date"
+                                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
+                                onFocus={handleFocus}
+                                placeholder="Fecha"
+                            />
+                        </div>
                         <input
-                            type="date"
-                            placeholder="Fecha"
-                            className=" rounded-lg p-2 text-base h-12 w-80"
-                        />
-                        <input
-                            type="submit"
-                            value="Buscar"
+                            type="button"
+                            value="BUSCAR"
                             className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
                         />
                     </div>
