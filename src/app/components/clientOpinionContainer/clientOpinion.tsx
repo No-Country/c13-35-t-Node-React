@@ -24,7 +24,7 @@ const ClientOpinion: React.FC<ClientOpinionProps> = (props) => {
                     ></Image>
                 )}
             </div>
-            <h3 className="text-left ">{props.name}</h3>
+            <h3 className="text-left font-bold">{props.name}</h3>
         </div>
     );
 };

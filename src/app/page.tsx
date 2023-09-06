@@ -1,9 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import Image from "next/image";
-import Select from "react-select";
+import Select, {
+    components,
+    SingleValueProps,
+    OptionProps,
+} from "react-select";
 import ClientOpinion from "./components/clientOpinionContainer/clientOpinion";
 import Accordion from "./components/accordion/accordion";
+import { FaLocationDot, FaCalendarDays } from "react-icons/fa6";
+
+const CustomOption: React.FC<OptionProps<any>> = ({ innerProps, label }) => (
+    <div className="m-3" {...innerProps}>
+        {label}
+    </div>
+);
+
+const CustomSingleValue: React.FC<SingleValueProps<any>> = ({
+    children,
+    ...props
+}) => (
+    <components.SingleValue {...props}>
+        <div className="inline-flex justify-start items-center">
+            <FaLocationDot className="mr-2 text-color-button text-xl" />
+            {children}
+        </div>
+    </components.SingleValue>
+);
+
+type CityOption = {
+    value: string;
+    label: string;
+};
 
 export default function Home() {
     const faqData = [
@@ -26,9 +54,9 @@ export default function Home() {
         },
     ];
 
-    const [city, setCity] = useState([]);
+    const [selectedCity, setSelectedCity] = React.useState<CityOption | null>(null);
 
-    const optionsCities = [
+    const optionsCities: CityOption[] = [
         { value: "Medellin", label: "Medellin" },
         { value: "Itagui", label: "Itagui" },
         { value: "Rionegro", label: "Rionegro" },
@@ -36,12 +64,14 @@ export default function Home() {
         { value: "Belen", label: "Belen" },
     ];
 
-    const handleCityChange = async (
-        selected: React.SetStateAction<never[]>
-    ) => {
-        // const { action } = selectaction;
-        setCity(selected);
+    const handleChange = (selectedOption: CityOption | null) => {
+        setSelectedCity(selectedOption);
     };
+
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        event.target.type = "date";
+    };
+
     return (
         <div className="w-full h-full m-auto text-color-text-black font-inriasans">
             <section className="bg-banner py-[150px] bg-no-repeat bg-cover bg-center">
@@ -63,31 +93,48 @@ export default function Home() {
                         Encuentra, reserva y disfruta de instalaciones
                         deportivas de primera clase en minutos.
                     </p>
-                    <div className="border-2 rounded-lg m-auto py-2 bg-[#CDCDCD] justify-around flex items-center">
+                    <div className="border-2 rounded-lg m-auto p-0 bg-[#CDCDCD] justify-around flex items-center">
                         <Select
                             id="selectCity"
                             instanceId="selectCity"
-                            isMulti
                             name="colors"
                             className="rounded-lg p-3 text-base w-[450px] font-inriasans"
                             classNamePrefix="select"
                             options={optionsCities}
-                            placeholder="Ubicación"
+                            placeholder={
+                                <div className="inline-flex justify-start items-center">
+                                    <FaLocationDot className="mr-2 text-color-button text-xl" />
+                                    Ubicación
+                                </div>
+                            }
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
                                     minHeight: "2.75rem",
                                 }),
                             }}
+                            value={selectedCity}
+                            onChange={handleChange}
+                            components={{
+                                Option: CustomOption,
+                                SingleValue: CustomSingleValue,
+                            }}
                         />
-                        <input
-                            type="date"
-                            placeholder="Fecha"
-                            className="rounded-lg p-2 text-base h-12 w-80"
-                        />
+
+                        <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
+                            <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
+                            <input
+                                type="text"
+                                id="dateInput"
+                                name="date"
+                                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
+                                onFocus={handleFocus}
+                                placeholder="Fecha"
+                            />
+                        </div>
                         <input
                             type="button"
-                            value="Buscar"
+                            value="BUSCAR"
                             className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
                         />
                     </div>
@@ -196,24 +243,24 @@ export default function Home() {
             <section className="py-28 border-color-text-black border-2 bg-usercomments">
                 <div className="max-w-[1020px] m-auto flex justify-between">
                     <ClientOpinion
-                        name="Florence Abbott"
-                        profilePictureSrc="https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1886&q=80"
+                        name="Valentina Rodríguez"
+                        profilePictureSrc="https://images.unsplash.com/photo-1615912021740-c4290248ea76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                         comment="Increíblemente conveniente. Reservar una cancha de tenis es pan comido ahora. Horarios flexibles y confirmación instantánea hacen que todo sea más fácil."
                     />
                     <ClientOpinion
-                        name="Jackson McCormick"
-                        profilePictureSrc="https://images.pexels.com/photos/6078310/pexels-photo-6078310.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        name="Alejandro González"
+                        profilePictureSrc="https://images.unsplash.com/photo-1641280173256-0ac1b2f4cd78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                         comment="El sistema de reserva de gimnasios es genial. Encuentro fácilmente un lugar para entrenar, y la opción de espacios privados es perfecta."
                     />
                     <ClientOpinion
-                        name="Antonio Douglas"
-                        profilePictureSrc="https://images.unsplash.com/photo-1555255508-f8259dbe6fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                        name="Diego Martínez"
+                        profilePictureSrc="https://images.unsplash.com/photo-1602339786708-26ad0b0aeedb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                         comment="¡Finalmente puedo organizar partidos de fútbol sin complicaciones! Reservar canchas es rápido, y la variedad de tamaños me permite elegir según nuestra cantidad de jugadores."
                     />
                 </div>
             </section>
             <section
-                className="py-28"
+                className="py-28 bg-center bg-cover "
                 style={{
                     backgroundImage: `url("../assets/FAQ.png")`,
                 }}
@@ -233,7 +280,9 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <section className="py-28 bg-color-bg bg-search bg-cover bg-center bg-no-repeat">
+            <section className="py-28 bg-color-bg bg-cover bg-center bg-no-repeat" style={{
+                    backgroundImage: `url("../assets/bg-search.png")`,
+                }}>
                 <div className="max-w-[1020px] m-auto">
                     <h2
                         className="text-5xl text-center mb-28 text-white"
@@ -243,31 +292,48 @@ export default function Home() {
                     >
                         Encuentra Tu Lugar Perfecto para Jugar
                     </h2>
-                    <div className="border-2 rounded-lg m-auto py-2 bg-[#CDCDCD] justify-around flex items-center">
+                    <div className="border-2 rounded-lg m-auto p-0 bg-[#CDCDCD] justify-around flex items-center">
                         <Select
                             id="selectCity"
                             instanceId="selectCity"
-                            isMulti
                             name="colors"
-                            className="rounded-lg p-2 text-base w-[450px] font-inriasans"
+                            className="rounded-lg p-3 text-base w-[450px] font-inriasans"
                             classNamePrefix="select"
                             options={optionsCities}
-                            placeholder="Ubicación"
+                            placeholder={
+                                <div className="inline-flex justify-start items-center">
+                                    <FaLocationDot className="mr-2 text-color-button text-xl" />
+                                    Ubicación
+                                </div>
+                            }
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
                                     minHeight: "2.75rem",
                                 }),
                             }}
+                            value={selectedCity}
+                            onChange={handleChange}
+                            components={{
+                                Option: CustomOption,
+                                SingleValue: CustomSingleValue,
+                            }}
                         />
+
+                        <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
+                            <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
+                            <input
+                                type="text"
+                                id="dateInput"
+                                name="date"
+                                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
+                                onFocus={handleFocus}
+                                placeholder="Fecha"
+                            />
+                        </div>
                         <input
-                            type="date"
-                            placeholder="Fecha"
-                            className=" rounded-lg p-2 text-base h-12 w-80"
-                        />
-                        <input
-                            type="submit"
-                            value="Buscar"
+                            type="button"
+                            value="BUSCAR"
                             className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
                         />
                     </div>
