@@ -243,18 +243,18 @@ export default function Home() {
             <section className="py-28 border-color-text-black border-2 bg-usercomments">
                 <div className="max-w-[1020px] m-auto flex justify-between">
                     <ClientOpinion
-                        name="Florence Abbott"
-                        profilePictureSrc="https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1886&q=80"
+                        name="Valentina Rodríguez"
+                        profilePictureSrc="https://images.unsplash.com/photo-1615912021740-c4290248ea76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                         comment="Increíblemente conveniente. Reservar una cancha de tenis es pan comido ahora. Horarios flexibles y confirmación instantánea hacen que todo sea más fácil."
                     />
                     <ClientOpinion
-                        name="Jackson McCormick"
-                        profilePictureSrc="https://images.pexels.com/photos/6078310/pexels-photo-6078310.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        name="Alejandro González"
+                        profilePictureSrc="https://images.unsplash.com/photo-1641280173256-0ac1b2f4cd78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                         comment="El sistema de reserva de gimnasios es genial. Encuentro fácilmente un lugar para entrenar, y la opción de espacios privados es perfecta."
                     />
                     <ClientOpinion
-                        name="Antonio Douglas"
-                        profilePictureSrc="https://images.unsplash.com/photo-1555255508-f8259dbe6fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                        name="Diego Martínez"
+                        profilePictureSrc="https://images.unsplash.com/photo-1602339786708-26ad0b0aeedb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                         comment="¡Finalmente puedo organizar partidos de fútbol sin complicaciones! Reservar canchas es rápido, y la variedad de tamaños me permite elegir según nuestra cantidad de jugadores."
                     />
                 </div>
@@ -280,7 +280,9 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <section className="py-28 bg-color-bg bg-search bg-cover bg-center bg-no-repeat">
+            <section className="py-28 bg-color-bg bg-cover bg-center bg-no-repeat" style={{
+                    backgroundImage: `url("../assets/bg-search.png")`,
+                }}>
                 <div className="max-w-[1020px] m-auto">
                     <h2
                         className="text-5xl text-center mb-28 text-white"
