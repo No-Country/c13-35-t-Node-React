@@ -7,14 +7,14 @@ function AboutPage() {
   return (
     <>
       <section
-        className="flex justify-center items-center bg-cover bg-center h-80 w-full"
+        className="flex justify-center items-center bg-cover bg-center h-80 w-full font-inriasans"
         style={{ backgroundImage: 'url(../../assets/cancha1.jpg)' }}
       >
         <h3 className="text-5xl font-semibold" style={{ textShadow: '4px 4px 8px rgba(0, 0, 0, 0.5)' }}>
           ACERCA DE
         </h3>
       </section>
-      <section className="text-center bg-white text-black px-20 h-80">
+      <section className="text-center bg-white text-black px-20 h-80 font-inriasans">
         <div className="mx-auto w-1/3">
           <div className="flex justify-between py-4">
             <Link href="#ourproduct">
@@ -29,12 +29,12 @@ function AboutPage() {
         <div className="h-0.5 w-90 bg-gradient-to-r from-transparent via-black to-transparent mx-auto"></div>
 
         <div className="mt-8 mb-10 flex flex-col gap-5">
-          <h4 className="mt-10">NUESTRO SERVICIO</h4>
+          <h4 className="mt-10">NUESTRO PRODUCTO</h4>
           <h2 className="text-5xl">Reserva en línea</h2>
           <p className="text-gray-500 text-lg">Reserva de Canchas de Fútbol en Línea: ¡Tu Solución para Disfrutar del Deporte!</p>
         </div>
       </section>
-      <section id="ourproduct" className="bg-white text-black h-screen">
+      <section id="ourproduct" className="bg-white text-black h-screen font-inriasans">
         <div className="flex">
           <div className="w-1/2">
             <img src="../../assets/cancha2.jpg" alt="cancha2" className="object-cover bg-center h-screen" />
@@ -61,7 +61,7 @@ function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="bg-white text-black pt-10 pb-20" id="aboutus">
+      <section className="bg-white text-black pt-10 pb-20 font-inriasans" id="aboutus">
         <div className=" mb-10 flex flex-col gap-5 text-center">
           <h4 className="mt-10">NOSOTROS</h4>
           <h2 className="text-5xl">Nuestro Equipo</h2>
@@ -144,7 +144,7 @@ function AboutPage() {
                     </div>
                 </div>                
                 
-                <p className="text-justify mt-2">Lorem ipsum dolor sit amet  consectetur adipisicing elit consectetur adipisicing eli. Eligendi ducimus perferendis assumenda eos numquam porro culpa nisi odio</p>
+                <p className="text-justify mt-2">Desarrolladora Full Stack (React.js, Javascript, Java, HTML, CSS, SQL).</p>
               </div>
               <div className="w-1/2 flex justify-center">
                 <img src="../../assets/giuliana.jpg" alt="giuliana"  className="h-80 w-80 rounded-full border border-blue-800"/>
@@ -160,9 +160,9 @@ function AboutPage() {
                         <h6>FRONTEND DEV</h6>
                         <h5 className="font-bold">FERNANDA CALZOLARI</h5>
                     </div>                    
-                    <div className="flex items-center gap-3 text.xl">
-                        <Link href="https://www.linkedin.com/in/marcos-aravena/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
-                        <Link href="https://github.com/msaravena" target='_blank' rel="noreferrer"><BsGithub /></Link>
+                    <div className="flex items-center gap-3 text-xl">
+                        <Link href="https://www.linkedin.com/in/mariafernandacalzolari/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
+                        <Link href="https://github.com/fercalzo" target='_blank' rel="noreferrer"><BsGithub /></Link>
                     </div>
 
                 </div>
@@ -207,7 +207,7 @@ function AboutPage() {
 
                 </div>
                 
-                <p className="text-justify mt-2">Lorem ipsum dolor sit amet  consectetur adipisicing elit. Eligendi ducimus perferendis assumenda eos numquam porro culpa nisi odio</p>
+                <p className="text-justify mt-2">FullStack Developer, creador, curioso, eterno aprendiz y apasionado por la tecnología. Mi stack es NodeJs, Django, React y MySQL.</p>
               </div>
             </div>
             <div className="flex w-2/3">
@@ -215,8 +215,8 @@ function AboutPage() {
               <div className="flex flex-col justify-center text-right w-1/2">
                 <div className="flex justify-between">
                     <div className="flex gap-3 items-center text-xl">
-                      <Link href="https://www.linkedin.com/in/marcos-aravena/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
-                      <Link href="https://github.com/msaravena" target='_blank' rel="noreferrer"><BsGithub /></Link>
+                      <Link href="https://www.linkedin.com/in/cintiaredondas/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
+                      <Link href="https://github.com/ceredondas" target='_blank' rel="noreferrer"><BsGithub /></Link>
                     </div>
                     <div>
                       <h6>UX/UN & TESTER</h6>
@@ -253,8 +253,8 @@ function AboutPage() {
               <div className="flex flex-col justify-center text-right w-1/2">
                 <div className="flex justify-between">
                     <div className="flex gap-3 items-center text-xl">
-                      <Link href="https://www.linkedin.com/in/tatiana-sanchez-sanin/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
-                      <Link href="https://github.com/TatianaSanchez01" target='_blank' rel="noreferrer"><BsGithub /></Link>
+                      <Link href="https://www.linkedin.com/in/franco-tejada-427ab2250/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
+                      <Link href="https://github.com/FrancoNos" target='_blank' rel="noreferrer"><BsGithub /></Link>
                     </div>
                     <div>
                       <h6>FRONTEND DEV</h6>
