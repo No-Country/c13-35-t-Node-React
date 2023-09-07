@@ -26,8 +26,8 @@ const Register2: React.FC<Register2Props> = (props) => {
         handleSubmit,
     } = useForm({
         defaultValues: {
-            usuario: "",
-            contraseña: "",
+            username: "",
+            password: "",
             confirmarContraseña: "",
         },
     });
@@ -53,10 +53,34 @@ const Register2: React.FC<Register2Props> = (props) => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         sendEmail();
 
-        router.push("/log-in");
+        try {
+            const response = await fetch(
+                "https://goolbooking-api.onrender.com/auth/registro",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                    }),
+                }
+            );
+
+            if (response.ok) {
+                // API request was successful, you can redirect or perform other actions here
+                router.push("/login");
+            } else {
+                // Handle the case where the API request failed
+                console.error("API request failed");
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -214,29 +238,29 @@ const Register2: React.FC<Register2Props> = (props) => {
                 >
                     <div className="">
                         <label
-                            htmlFor="usuario"
+                            htmlFor="username"
                             className="text-black text-left font-semibold text-base my-5"
                         >
                             Usuario *
                         </label>
                         <input
-                            id="usuario"
+                            id="username"
                             type="text"
-                            {...register("usuario", {
+                            {...register("username", {
                                 required: true,
                                 minLength: 3,
                                 maxLength: 20,
                                 pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ0-9\s\-']+$/,
                             })}
                             className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                errors.usuario ? "border-red-700" : ""
+                                errors.username ? "border-red-700" : ""
                             }`}
                             value={username}
                             onChange={(e) => setUserName(e.target.value)}
                             name="username"
                         />
 
-                        {errors.usuario?.type === "minLength" && (
+                        {errors.username?.type === "minLength" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -244,7 +268,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.usuario?.type === "maxLength" && (
+                        {errors.username?.type === "maxLength" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -252,7 +276,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.usuario?.type === "pattern" && (
+                        {errors.username?.type === "pattern" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -261,7 +285,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.usuario?.type === "required" && (
+                        {errors.username?.type === "required" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -279,9 +303,9 @@ const Register2: React.FC<Register2Props> = (props) => {
                             Contraseña *
                         </label>
                         <input
-                            id="contraseña"
+                            id="password"
                             type="password"
-                            {...register("contraseña", {
+                            {...register("password", {
                                 required: true,
                                 minLength: 6,
                                 maxLength: 10,
@@ -289,7 +313,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
                             })}
                             className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                errors.contraseña ? "border-red-700" : ""
+                                errors.password ? "border-red-700" : ""
                             }`}
                             onClick={togglePasswordRules}
                         />
@@ -304,7 +328,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                             </div>
                         )}
 
-                        {errors.contraseña?.type === "minLength" && (
+                        {errors.password?.type === "minLength" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -313,7 +337,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.contraseña?.type === "maxLength" && (
+                        {errors.password?.type === "maxLength" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -322,7 +346,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.contraseña?.type === "pattern" && (
+                        {errors.password?.type === "pattern" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -331,7 +355,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.contraseña?.type === "required" && (
+                        {errors.password?.type === "required" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -351,7 +375,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                         <input
                             id="confirmarContraseña"
                             type="password"
-                            {...register("contraseña", {
+                            {...register("password", {
                                 required: true,
                                 minLength: 6,
                                 maxLength: 10,
@@ -367,34 +391,6 @@ const Register2: React.FC<Register2Props> = (props) => {
                             onChange={(e) => setPassword(e.target.value)}
                             name="password"
                         />
-
-                        {errors.confirmarContraseña?.type === "minLength" && (
-                            <div className="inline-flex justify-start items-center">
-                                <IoIosAlert className=" text-[#B40000] mr-2" />
-                                <p className="text-red-700">
-                                    La contraseña debe tener al menos 6
-                                    caracteres
-                                </p>
-                            </div>
-                        )}
-                        {errors.confirmarContraseña?.type === "maxLength" && (
-                            <div className="inline-flex justify-start items-center">
-                                <IoIosAlert className=" text-[#B40000] mr-2" />
-                                <p className="text-red-700">
-                                    La contraseña debe tener menos de 10
-                                    caracteres
-                                </p>
-                            </div>
-                        )}
-                        {errors.confirmarContraseña?.type === "pattern" && (
-                            <div className="inline-flex justify-start items-center">
-                                <IoIosAlert className=" text-[#B40000] mr-2" />
-                                <p className="text-red-700">
-                                    La contraseña no cumple con las reglas. Por
-                                    favor, ingrese una contraseña correcta.
-                                </p>
-                            </div>
-                        )}
                         {errors.confirmarContraseña?.type === "validate" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
@@ -451,7 +447,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                         <p className="text-black  text-base font-normal leading-13.75">
                             {" "}
                             ¿Ya tienes una cuenta?
-                            <Link href="/log-in">
+                            <Link href="/login">
                                 <span className="text-blue-500  font-normal text-base leading-14 ml-1">
                                     Inicia sesión
                                 </span>

@@ -12,9 +12,9 @@ interface RegisterProps {}
 const Register: React.FC<RegisterProps> = (props) => {
     const router = useRouter(); //Agregado
 
-    const [nombreYapellido, setNombreYApellido] = useState("");
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [telefono, setTelefono] = useState("");
+    const [phone, setPhone] = useState("");
 
     const form = useRef<HTMLFormElement>(null);
     const {
@@ -23,14 +23,39 @@ const Register: React.FC<RegisterProps> = (props) => {
         handleSubmit,
     } = useForm({
         defaultValues: {
-            nombreYapellido: "",
+            name: "",
             email: "",
-            telefono: "",
+            phone: "",
         },
     });
 
-    const onSubmit = () => {
-        router.push("/register2");
+    const onSubmit = async () => {
+        try {
+            const response = await fetch(
+                "https://goolbooking-api.onrender.com/auth/registro",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                    }),
+                }
+            );
+
+            if (response.ok) {
+                // API request was successful, you can redirect or perform other actions here
+                router.push("/register2");
+            } else {
+                // Handle the case where the API request failed
+                console.error("API request failed");
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -191,15 +216,15 @@ const Register: React.FC<RegisterProps> = (props) => {
                 >
                     <div>
                         <label
-                            htmlFor="nombreYapellido"
+                            htmlFor="name"
                             className="text-black text-left font-semibold text-base my-5"
                         >
                             Nombre y Apellido *
                         </label>
                         <input
                             type="text"
-                            id="nombreYapellido"
-                            {...register("nombreYapellido", {
+                            id="name"
+                            {...register("name", {
                                 required: true,
                                 minLength: 3,
                                 maxLength: 30,
@@ -207,15 +232,15 @@ const Register: React.FC<RegisterProps> = (props) => {
                             })}
                             onPaste={(e) => e.preventDefault()}
                             className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                errors.nombreYapellido
+                                errors.name
                                     ? "outline border-red-700 border-2"
                                     : ""
                             }`}
-                            value={nombreYapellido}
-                            onChange={(e) => setNombreYApellido(e.target.value)}
-                            name="nombreYapellido"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            name="name"
                         />
-                        {errors.nombreYapellido?.type === "minLength" && (
+                        {errors.name?.type === "minLength" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-[#B40000] border">
@@ -223,7 +248,7 @@ const Register: React.FC<RegisterProps> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.nombreYapellido?.type === "maxLength" && (
+                        {errors.name?.type === "maxLength" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -231,7 +256,7 @@ const Register: React.FC<RegisterProps> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.nombreYapellido?.type === "required" && (
+                        {errors.name?.type === "required" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-red-700">
@@ -287,28 +312,28 @@ const Register: React.FC<RegisterProps> = (props) => {
                     <div>
                         <label
                             className="text-black text-left font-semibold text-base my-5"
-                            htmlFor="teléfono"
+                            htmlFor="phone"
                         >
                             Teléfono *
                         </label>
                         <input
-                            id="telefono"
+                            id="phone"
                             type="tel"
-                            {...register("telefono", {
+                            {...register("phone", {
                                 required: true,
                                 pattern: phonePattern,
                             })}
                             inputMode="numeric"
                             className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                errors.telefono
+                                errors.phone
                                     ? "outline border-red-700 border-2"
                                     : ""
                             }`}
-                            value={telefono}
-                            onChange={(e) => setTelefono(e.target.value)}
-                            name="telefono"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            name="phone"
                         />
-                        {errors.telefono?.type === "required" && (
+                        {errors.phone?.type === "required" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-[#B40000]">
@@ -316,7 +341,7 @@ const Register: React.FC<RegisterProps> = (props) => {
                                 </p>
                             </div>
                         )}
-                        {errors.telefono?.type === "pattern" && (
+                        {errors.phone?.type === "pattern" && (
                             <div className="inline-flex justify-start items-center">
                                 <IoIosAlert className=" text-[#B40000] mr-2" />
                                 <p className="text-[#B40000]">
