@@ -219,7 +219,7 @@ function AboutPage() {
                       <Link href="https://github.com/ceredondas" target='_blank' rel="noreferrer"><BsGithub /></Link>
                     </div>
                     <div>
-                      <h6>UX/UN & TESTER</h6>
+                      <h6>UX/UI & TESTER</h6>
                       <h5 className="font-bold">CINTIA REDONDAS</h5>
                     </div>                
                 </div>
