@@ -24,25 +24,25 @@ export default function Contact(): JSX.Element {
   });
 
   const sendEmail = () => {
-    if (form.current){
-    emailjs
-      .sendForm(
-        "service_2w4po7s",
-        "template_bmj9yw1",
-        form.current,
-        "ZNatgk5c_gNL_YC0o"
-      )
-      .then((result) => {
-        console.log(result.text);
-        setIsPopupVisible(true); 
-        setTimeout(() => {
-          setIsPopupVisible(false); 
-          window.location.reload(); 
-        }, 3000); 
-      })
-      .catch((error) => {
-        console.log(error.text);
-      });
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_2w4po7s",
+          "template_bmj9yw1",
+          form.current,
+          "ZNatgk5c_gNL_YC0o"
+        )
+        .then((result) => {
+          console.log(result.text);
+          setIsPopupVisible(true);
+          setTimeout(() => {
+            setIsPopupVisible(false);
+            window.location.reload();
+          }, 3000);
+        })
+        .catch((error) => {
+          console.log(error.text);
+        });
     }
   };
 
@@ -61,7 +61,7 @@ export default function Contact(): JSX.Element {
     <div
       className="flex items-center justify-start min-h-screen pl-32"
       style={{
-        backgroundImage: `url('https://images.pexels.com/photos/701773/pexels-photo-701773.jpeg')`,
+        backgroundImage: `url('https://i.imgur.com/64kMDGJ.jpg')`,
         backgroundSize: "cover",
       }}
     >
@@ -69,16 +69,17 @@ export default function Contact(): JSX.Element {
         className=" p-8 shadow-md rounded-md max-w-md w-full"
         style={{
           width: "506px",
-          minHeight: "866.2px",
+          minHeight: "1024px",
         }}
       >
         <h1
           className="text-2xl font-semibold mb-4"
           style={{
             fontFamily: "'Inria Sans', sans-serif",
-            color: "#444B59",
+
             fontWeight: "bold",
-            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.55)",
+            color: "#fff",
+            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
           }}
         >
           CONTACTO
@@ -89,7 +90,8 @@ export default function Contact(): JSX.Element {
               htmlFor="firstName"
               className="block mb-2 font-medium"
               style={{
-                color: "#444B59",
+                color: "#fff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
                 fontFamily: "'Inria Sans', sans-serif",
                 fontWeight: "bold",
               }}
@@ -99,7 +101,6 @@ export default function Contact(): JSX.Element {
             <input
               type="text"
               id="nombre"
-              
               {...register("nombre", {
                 required: true,
                 minLength: 3,
@@ -111,22 +112,22 @@ export default function Contact(): JSX.Element {
               }`}
             />
             {errors.nombre?.type === "required" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
-                Falta completar con el nombre y el apellido
+              <p className="text-red-500" style={{ color: "#B40000" }}>
+                Falta completar con el nombre
               </p>
             )}
             {errors.nombre?.type === "minLength" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#B40000" }}>
                 El campo nombre debe tener al menos 3 caracteres
               </p>
             )}
             {errors.nombre?.type === "maxLength" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#B40000" }}>
                 El campo nombre debe tener menos de 30 caracteres
               </p>
             )}
             {errors.nombre?.type === "pattern" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#B40000" }}>
                 El nombre es incorrecto. Por favor, reingréselo.
               </p>
             )}
@@ -137,7 +138,8 @@ export default function Contact(): JSX.Element {
               htmlFor="apellidos"
               className="block mb-2 font-medium"
               style={{
-                color: "#444B59",
+                color: "#fff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
                 fontFamily: "'Inria Sans', sans-serif",
                 fontWeight: "bold",
               }}
@@ -147,7 +149,6 @@ export default function Contact(): JSX.Element {
             <input
               type="text"
               id="apellidos"
-              
               {...register("apellidos", {
                 required: false,
                 minLength: 3,
@@ -160,17 +161,17 @@ export default function Contact(): JSX.Element {
             />
 
             {errors.apellidos?.type === "minLength" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El campo apellidos debe tener al menos 3 caracteres
               </p>
             )}
             {errors.apellidos?.type === "maxLength" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El campo apellidos debe tener menos de 30 caracteres
               </p>
             )}
             {errors.apellidos?.type === "pattern" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 Los apellidos son incorrectos. Por favor, reingréselos.
               </p>
             )}
@@ -181,7 +182,8 @@ export default function Contact(): JSX.Element {
               htmlFor="email"
               className="block mb-2 font-medium"
               style={{
-                color: "#444B59",
+                color: "#fff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
                 fontFamily: "'Inria Sans', sans-serif",
                 fontWeight: "bold",
               }}
@@ -191,7 +193,6 @@ export default function Contact(): JSX.Element {
             <input
               type="email"
               id="email"
-              
               {...register("email", {
                 required: true,
                 pattern: emailPattern,
@@ -201,12 +202,12 @@ export default function Contact(): JSX.Element {
               }`}
             />
             {errors.email?.type === "required" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 Falta completar el mail
               </p>
             )}
             {errors.email?.type === "pattern" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El mail es incorrecto. Por favor, reingréselo siguiendo el
                 formato mail@proveedor.xxx
               </p>
@@ -218,7 +219,8 @@ export default function Contact(): JSX.Element {
               htmlFor="telefono"
               className="block mb-2 font-medium"
               style={{
-                color: "#444B59",
+                color: "#fff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
                 fontFamily: "'Inria Sans', sans-serif",
                 fontWeight: "bold",
               }}
@@ -228,7 +230,6 @@ export default function Contact(): JSX.Element {
             <input
               type="tel"
               id="telefono"
-              
               {...register("telefono", {
                 required: false,
                 pattern: phonePattern,
@@ -240,12 +241,12 @@ export default function Contact(): JSX.Element {
             />
 
             {errors.telefono?.type === "required" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 Falta completar el teléfono
               </p>
             )}
             {errors.telefono?.type === "pattern" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El teléfono debe contener solo números
               </p>
             )}
@@ -256,7 +257,8 @@ export default function Contact(): JSX.Element {
               htmlFor="subject"
               className="block mb-2 font-medium"
               style={{
-                color: "#444B59",
+                color: "#fff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
                 fontFamily: "'Inria Sans', sans-serif",
                 fontWeight: "bold",
               }}
@@ -266,7 +268,6 @@ export default function Contact(): JSX.Element {
             <input
               type="text"
               id="asunto"
-              
               {...register("asunto", {
                 required: true,
                 pattern: subjectPattern,
@@ -276,14 +277,14 @@ export default function Contact(): JSX.Element {
               }`}
             />
             {errors.asunto?.type === "required" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 Falta completar el asunto
               </p>
             )}
             {errors.asunto?.type === "pattern" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
-                El asunto debe cumplir con los requisitos de formato
-                establecidos
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
+                El asunto debe ser alfabético y contener entre 3 y 100
+                caracteres
               </p>
             )}
           </div>
@@ -293,7 +294,8 @@ export default function Contact(): JSX.Element {
               htmlFor="message"
               className="block mb-2 font-medium"
               style={{
-                color: "#444B59",
+                color: "#fff",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.75)",
                 fontFamily: "'Inria Sans', sans-serif",
                 fontWeight: "bold",
               }}
@@ -316,23 +318,23 @@ export default function Contact(): JSX.Element {
             />
 
             {errors.message?.type === "required" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 Falta completar el mensaje
               </p>
             )}
             {errors.message?.type === "pattern" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El mensaje debe cumplir con los requisitos de formato
                 establecidos
               </p>
             )}
             {errors.message?.type === "minLength" && (
-              <p className="text-red-500" style={{  fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El mensaje debe tener al menos 3 caracteres
               </p>
             )}
             {errors.message?.type === "maxLength" && (
-              <p className="text-red-500" style={{ fontWeight: "bold", color: "#B40000" }}>
+              <p className="text-red-500" style={{ color: "#FFB8B8" }}>
                 El mensaje no puede exceder los 2000 caracteres
               </p>
             )}
