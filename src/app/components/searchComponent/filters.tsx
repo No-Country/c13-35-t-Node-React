@@ -1,0 +1,139 @@
+"use client";
+import { useForm } from "react-hook-form";
+import useFiltersStore from "../../search/filtersState";
+
+export default function Filters() {
+  const { setCiudad, setDeporte, setServicios, setMinimo, setMaximo } =
+    useFiltersStore();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => {
+    setCiudad(data.cuidad);
+    setDeporte(data.deporte);
+    setServicios(data.servicios);
+    setMinimo(data.minimo);
+    setMaximo(data.maximo);
+  };
+
+  return (
+    <aside className="w-80">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="bg-color-button p-3 ">
+          <h2>Canchas en Buenos Aires</h2>
+          <button className="text-xs">BORRAR FILTROS</button>
+        </div>
+        <div className="bg-color-text-black p-3 h-auto">
+          <div className="flex flex-col">
+            <div className="flex justify-between">
+              <h2 className="text-white">Cuidad</h2>
+              <button className="text-white">reset</button>
+            </div>
+            <select
+              className="w-full px-2 py-1 rounded-md focus:outline-none"
+              {...register("cuidad")}
+            >
+              <option className="" value="" defaultValue="">
+                Seleccione la cuidad
+              </option>
+              <option value="buenos_aires">Buenos aires</option>
+              <option value="cordoba">Córdoba</option>
+              <option value="rosario">Rosario</option>
+              <option value="mendoza">Mendoza</option>
+              <option value="san_juan">San Juan</option>
+            </select>
+          </div>
+
+          <div>
+            <h2 className="text-white">Deporte</h2>
+            <select
+              className="w-full px-2 py-1 rounded-md"
+              {...register("deporte")}
+            >
+              <option value="" defaultValue="">
+                Seleccione el deporte
+              </option>
+              <option value="futbol">Futbol</option>
+              <option value="tenis">Tenis</option>
+              <option value="padel">Padel</option>
+              <option value="basket">Basket</option>
+            </select>
+          </div>
+          <div className="">
+            <h2 className="text-white">servicios</h2>
+            <div className="flex flex-col">
+              <div className="flex ">
+                <input
+                  type="checkbox"
+                  {...register("servicios")}
+                  value="Wifi"
+                />
+                <label className="text-white">Wifi</label>
+              </div>
+              <div className="flex ">
+                <input
+                  type="checkbox"
+                  {...register("servicios")}
+                  value="Cantina"
+                />
+                <label className="text-white">Cantina</label>
+              </div>
+              <div className="flex ">
+                <input
+                  type="checkbox"
+                  {...register("servicios")}
+                  value="Vestuario"
+                />
+                <label className="text-white">Vestuario</label>
+              </div>
+              <div className="flex ">
+                <input
+                  type="checkbox"
+                  {...register("servicios")}
+                  value="Cubierta "
+                />
+                <label className="text-white">Cubierta</label>
+              </div>
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  {...register("servicios")}
+                  value="Luces"
+                />
+                <label className="text-white">Luces</label>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-white">Rango de precios</h2>
+              <div className="flex justify-between gap-2">
+                <input
+                  type="number"
+                  placeholder="minimo"
+                  className="w-full rounded-md px-2 py-1 focus:outline-none"
+                  {...register("minimo", {
+                    max: 9999999999,
+                    min: 0,
+                    maxLength: 9999999999,
+                  })}
+                />
+                <input
+                  type="number"
+                  placeholder="maximo"
+                  className="w-full rounded-md px-2 py-1 focus:outline-none"
+                  {...register("maximo", {
+                    max: 9999999999,
+                    min: 0,
+                    maxLength: 9999999999,
+                  })}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="submit" />
+      </form>
+    </aside>
+  );
+}
