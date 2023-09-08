@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import { IoIosAlert } from "react-icons/io";
 
@@ -12,6 +12,11 @@ interface Register2Props {}
 
 const Register2: React.FC<Register2Props> = (props) => {
     const router = useRouter(); //Agregado
+
+    const searchParams = useSearchParams();
+    const name = searchParams.get("name");
+    const email = searchParams.get("email");
+    const phone = searchParams.get("phone");
 
     const [showPasswordRules, setShowPasswordRules] = useState(false);
 
@@ -65,30 +70,37 @@ const Register2: React.FC<Register2Props> = (props) => {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
                         username,
                         password,
                     }),
                 }
-            );
-
-            if (response.ok) {
-                // API request was successful, you can redirect or perform other actions here
-                router.push("/login");
-            } else {
-                // Handle the case where the API request failed
-                console.error("API request failed");
-            }
+            )
+                .then((response) => {
+                    if (response.ok) {
+                        // API request was successful, you can redirect or perform other actions here
+                        console.log(response.json());
+                        router.push("/login");
+                    } else {
+                        // Handle the case where the API request failed
+                        console.log(response.json());
+                        console.error("API request failed");
+                    }
+                })
+                .catch((e) => console.error(e));
         } catch (error) {
             console.error(error);
         }
     };
 
     return (
-        <div className="flex flex-row mx-44 font-inriasans h-full justify-center">
+        <div className="flex flex-row mx-auto my-0 font-inriasans justify-center">
             {/* seccion izquierda (formulario y botones) */}
-            <div className="w-[420px] h-full p-8 bg-color-form-bg">
+            <div className="w-[420px] flex-none p-8 bg-color-form-bg">
                 <div className="w-full h-82">
-                    <h2 className=" text-color-text-black font-semibold text-2xl my-5 ml-6">
+                    <h2 className=" text-color-text-black font-semibold text-2xl my-5">
                         REGISTRATE
                     </h2>
                 </div>
@@ -459,13 +471,14 @@ const Register2: React.FC<Register2Props> = (props) => {
 
             {/* seccion derecha (imagen) */}
 
-            <div className="flex bg-gray-100">
-                <div className="bg-lightgray bg-cover bg-center relative">
+            <div className="flex bg-gray-100 h-full overflow-hidden relative">
+                <div className="bg-lightgray bg-cover bg-center w-full h-full">
                     <Image
                         src={"/fotoCancha.jpg"}
                         alt="Imagen cancha"
                         width={653}
                         height={625}
+                        className="object-cover"
                         priority
                     />
                 </div>

@@ -30,43 +30,18 @@ const Register: React.FC<RegisterProps> = (props) => {
     });
 
     const onSubmit = async () => {
-        try {
-            const response = await fetch(
-                "https://goolbooking-api.onrender.com/auth/registro",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        phone,
-                    }),
-                }
-            );
-
-            if (response.ok) {
-                // API request was successful, you can redirect or perform other actions here
-                router.push("/register2");
-            } else {
-                // Handle the case where the API request failed
-                console.error("API request failed");
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        router.push("/register2");
     };
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const phonePattern = /^[0-9]*$/;
 
     return (
-        <div className="flex flex-row mx-44 font-inriasans h-full justify-center">
+        <div className="flex flex-row mx-auto my-0 font-inriasans h-full justify-center">
             {/* seccion izquierda (formulario y botones) */}
-            <div className="w-[420px] h-full p-8 bg-color-form-bg">
+            <div className="w-[420px] p-8 bg-color-form-bg flex-none">
                 <div className="w-full h-82">
-                    <h2 className=" text-color-text-black font-semibold text-2xl my-5 ml-6">
+                    <h2 className=" text-color-text-black font-semibold text-2xl my-5">
                         REGISTRATE
                     </h2>
                 </div>
@@ -362,7 +337,13 @@ const Register: React.FC<RegisterProps> = (props) => {
                             disabled={Object.keys(errors).length > 0}
                         >
                             <div className="flex justify-between">
-                                <p>Siguiente</p> &gt;
+                                <Link
+                                    href={`/register2`}
+                                    as={`/register2?name=${name}&email=${email}&phone=${phone}`}
+                                >
+                                    Siguiente
+                                </Link>{" "}
+                                &gt;
                             </div>
                         </button>
                     </div>
@@ -410,8 +391,8 @@ const Register: React.FC<RegisterProps> = (props) => {
 
             {/* seccion derecha (imagen) */}
 
-            <div className="flex bg-gray-100 h-full overflow-hidden">
-                <div className="bg-lightgray bg-cover bg-center relative">
+            <div className="flex bg-gray-100 h-full overflow-hidden relative">
+                <div className="bg-lightgray bg-cover bg-center w-full h-full">
                     <Image
                         src={"/fotoCancha.jpg"}
                         alt="Imagen cancha"
