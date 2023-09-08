@@ -1,41 +1,15 @@
-import CardResult from "@/app/components/card/card-product";
-import { Pagination } from "@/app/components/searchComponent/pagination";
-import { Filtro, FiltroList } from "@/app/components/searchComponent/filter";
-import { getCanchas } from "@/app/services/canchas";
+"use client"
+import Filtros from "@/app/components/searchComponent/filters";
+import Canchas from "@/app/components/card/canchas";
+import { useRouter, useSearchParams } from "next/navigation";
 
-interface cancha {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  reservada: boolean;
-  deporte: string;
-}
 
-export default async function SearchResults() {
-  const Canchas = await getCanchas();
+export default function SearchResults() {
   return (
-    <main className="flex justify-center gap-3 py-6">
-      <Filtro />
+    <main className="flex justify-center gap-3 py-6 sm:px-3 md:px-3 lg:px-3">
+      <Filtros />
       <section className="flex flex-col gap-2">
-        <div className="flex justify-between">
-          <p>1111 resultados</p>
-          <FiltroList/>
-        </div>
-        <div className="grid grid-cols-3 gap-9">
-          {Canchas.map((cancha: cancha) => (
-            <CardResult
-              key={cancha.id}
-              id={cancha.id}
-              nombre={cancha.nombre}
-              descripcion={cancha.descripcion}
-              precio={cancha.precio}
-            />
-          ))}
-        </div>
-        <div className="flex  items-center justify-center">
-          <Pagination />
-        </div>
+        <Canchas />
       </section>
     </main>
   );
