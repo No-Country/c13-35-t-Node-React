@@ -16,6 +16,7 @@ export default function Filters() {
     setServicios(data.servicios);
     setMinimo(data.minimo);
     setMaximo(data.maximo);
+    console.log(data);
   };
 
   return (
@@ -57,52 +58,70 @@ export default function Filters() {
               </option>
               <option value="futbol">Futbol</option>
               <option value="tenis">Tenis</option>
-              <option value="padel">Padel</option>
-              <option value="basket">Basket</option>
+              <option value="basquet">Basquet</option>
             </select>
           </div>
           <div className="">
             <h2 className="text-white">servicios</h2>
             <div className="flex flex-col">
-              <div className="flex ">
-                <input
-                  type="checkbox"
-                  {...register("servicios")}
-                  value="Wifi"
-                />
-                <label className="text-white">Wifi</label>
-              </div>
-              <div className="flex ">
-                <input
-                  type="checkbox"
-                  {...register("servicios")}
-                  value="Cantina"
-                />
-                <label className="text-white">Cantina</label>
-              </div>
-              <div className="flex ">
-                <input
-                  type="checkbox"
-                  {...register("servicios")}
-                  value="Vestuario"
-                />
-                <label className="text-white">Vestuario</label>
-              </div>
-              <div className="flex ">
-                <input
-                  type="checkbox"
-                  {...register("servicios")}
-                  value="Cubierta "
-                />
-                <label className="text-white">Cubierta</label>
-              </div>
               <div className="flex">
                 <input
                   type="checkbox"
+                  id="wifiCheckbox"
+                  {...register("servicios")}
+                  value="Wifi"
+                />
+                <label htmlFor="wifiCheckbox" className="text-white">
+                  Wifi
+                </label>
+              </div>
+
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  id="cantinaCheckbox"
+                  {...register("servicios")}
+                  value="Cantina"
+                />
+                <label htmlFor="cantinaCheckbox" className="text-white">
+                  Cantina
+                </label>
+              </div>
+
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  id="vestuarioCheckbox"
+                  {...register("servicios")}
+                  value="Vestuario"
+                />
+                <label htmlFor="vestuarioCheckbox" className="text-white">
+                  Vestuario
+                </label>
+              </div>
+
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  id="cubiertaCheckbox"
+                  {...register("servicios")}
+                  value="Cubierta"
+                />
+                <label htmlFor="cubiertaCheckbox" className="text-white">
+                  Cubierta
+                </label>
+              </div>
+
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  id="lucesCheckbox"
                   {...register("servicios")}
                   value="Luces"
                 />
-                <label className="text-white">Luces</label>
+                <label htmlFor="lucesCheckbox" className="text-white">
+                  Luces
+                </label>
               </div>
             </div>
             <div>
@@ -132,7 +151,7 @@ export default function Filters() {
             </div>
           </div>
         </div>
-        <input type="submit" />
+        <input className="cursor-pointer" type="submit" />
       </form>
     </aside>
   );

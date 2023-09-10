@@ -3,6 +3,7 @@ import CardResult from "@/app/components/card/card-product";
 import { getCanchas } from "@/app/services/canchas";
 import useFiltersStore from "../../search/filtersState";
 import { useEffect, useState } from "react";
+import SkeletonArticle from './skeleton'
 
 interface cancha {
   id: number;
@@ -14,51 +15,104 @@ interface cancha {
   valoracion: number;
 }
 
-const fetchData = async (
-  deporte: string,
-  ciudad: string,
-  setCanchas: (data: cancha[]) => void
-) => {
-  try {
-    const data = await getCanchas(deporte, ciudad);
-    setCanchas(data);
-  } catch (error) {
-    console.error("Error al obtener canchas:", error);
-  }
-};
-
-
 export default function Canchas() {
   const { deporte, setCanchas, ciudad, canchas } = useFiltersStore();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [orden, setOrden] = useState("relevante");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
+  const itemsPerPage = 6;
 
+  
   useEffect(() => {
-    fetchData(deporte, ciudad, setCanchas)
-  }, [deporte, ciudad, setCanchas]);
+    const fetchData = async () => {
+      try {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const data = await getCanchas(deporte, ciudad);
+        setTotalResults(data.length);
+        const paginatedData = data.slice(startIndex, endIndex);
+        setCanchas(paginatedData);
+        setLoading(false);
+        setError("");
+      } catch (error) {
+        setError("El tipo de cancha no fue encontrada");
+        setLoading(false);
+      }
+    };
+    if (!error) {
+      fetchData();
+      setError("");
+    }
+  }, [deporte, ciudad, setCurrentPage, currentPage]);
+
+  const canchasOrdenadas = [...canchas];
+
+  if (orden === "relevante") {
+    canchasOrdenadas.sort((a, b) => b.valoracion - a.valoracion);
+  } else if (orden === "menorPrecio") {
+    canchasOrdenadas.sort((a, b) => a.precio - b.precio);
+  } else if (orden === "mayorPrecio") {
+    canchasOrdenadas.sort((a, b) => b.precio - a.precio);
+  }
 
   return (
     <>
       <div className="flex justify-between">
-        <p>{canchas.length} resultados</p>
+        <p>{totalResults} resultados</p>
         <div className="flex">
           <p>Ordenar por:</p>
-          <select name="" id="">
-            <option value="">Más relevante</option>
-            <option value="">Menor precio</option>
-            <option value="">Mayor precio</option>
+          <select
+            name="orden"
+            id="orden"
+            value={orden}
+            onChange={(e) => setOrden(e.target.value)}
+          >
+            <option value="relevante">Más relevante</option>
+            <option value="menorPrecio">Menor precio</option>
+            <option value="mayorPrecio">Mayor precio</option>
           </select>
         </div>
       </div>
       <div className="grid grid-cols-3 gap-9 max-w-5xl max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-2">
-        {canchas.map((cancha: cancha) => (
-          <CardResult
-            key={cancha.id}
-            id={cancha.id}
-            nombre={cancha.nombre}
-            descripcion={cancha.descripcion}
-            precio={cancha.precio}
-            valoracion={cancha.valoracion}
-          />
-        ))}
+        {loading ? (
+          <>
+            <SkeletonArticle />
+            <SkeletonArticle />
+            <SkeletonArticle />
+            <SkeletonArticle />
+            <SkeletonArticle />
+            <SkeletonArticle />
+          </>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          canchasOrdenadas.map((cancha: cancha) => (
+            <CardResult
+              key={cancha.id}
+              id={cancha.id}
+              nombre={cancha.nombre}
+              descripcion={cancha.descripcion}
+              precio={cancha.precio}
+              valoracion={cancha.valoracion}
+            />
+          ))
+        )}
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        <button
+          onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        <button
+          onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+          disabled={canchas.length < itemsPerPage}
+        >
+          Siguiente
+        </button>
       </div>
     </>
   );
