@@ -29,15 +29,15 @@ export default function CardResult({
       <div className="flex flex-col justify-start px-5 py-5">
         <h3 className="font-bold text-base">{nombre}</h3>
         <p className="text-left text-sm">{descripcion}</p>
-        <a>ver mas...</a>
+        <Link href={`/search/${id}`} as={`/search/${id}`} className="text-sm">ver mas...</Link>
         <div className="flex items-center">
-          <h3 className="font-bold">$ {precio}</h3>
-          <p className="text-xs">(por hora)</p>
+          <p className="font-bold text-2xl">$ {precio}</p>
+          <p className="text-base">(por hora)</p>
         </div>
 
         <Rating value={valoracion} precision={0.1} readOnly />
       </div>
-      <div className="w-full rounded-br-lg rounded-bl-lg bg-[#576702] flex justify-center items-center">
+      <div className="w-full rounded-br-lg rounded-bl-lg bg-[#576702] flex justify-end items-center">
         <Link
           href={`/search/${id}`}
           className="text-white text-center text-xl w-full"

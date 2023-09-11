@@ -3,7 +3,8 @@ import CardResult from "@/app/components/card/card-product";
 import { getCanchas } from "@/app/services/canchas";
 import useFiltersStore from "../../search/filtersState";
 import { useEffect, useState } from "react";
-import SkeletonArticle from './skeleton'
+import SkeletonArticle from "./skeleton";
+import Pagination from "@mui/material/Pagination";
 
 interface cancha {
   id: number;
@@ -22,9 +23,10 @@ export default function Canchas() {
   const [orden, setOrden] = useState("relevante");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
+  const canchasOrdenadas = [...canchas];
   const itemsPerPage = 6;
+  const totalPages = Math.ceil(totalResults / itemsPerPage);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,8 +49,6 @@ export default function Canchas() {
     }
   }, [deporte, ciudad, setCurrentPage, currentPage]);
 
-  const canchasOrdenadas = [...canchas];
-
   if (orden === "relevante") {
     canchasOrdenadas.sort((a, b) => b.valoracion - a.valoracion);
   } else if (orden === "menorPrecio") {
@@ -56,6 +56,17 @@ export default function Canchas() {
   } else if (orden === "mayorPrecio") {
     canchasOrdenadas.sort((a, b) => b.precio - a.precio);
   }
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -101,18 +112,12 @@ export default function Canchas() {
         )}
       </div>
       <div className="flex items-center justify-center gap-2">
-        <button
-          onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-        <button
-          onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
-          disabled={canchas.length < itemsPerPage}
-        >
-          Siguiente
-        </button>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          size="large"
+          onChange={(event, value) => handlePageChange(event, value)}
+        />
       </div>
     </>
   );
