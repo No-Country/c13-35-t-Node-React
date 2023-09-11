@@ -1,15 +1,18 @@
 "use client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFiltersStore from "../../search/filtersState";
 
 export default function Filters() {
   const { setCiudad, setDeporte, setServicios, setMinimo, setMaximo } =
     useFiltersStore();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data: any) => {
     setCiudad(data.cuidad);
     setDeporte(data.deporte);
@@ -19,18 +22,38 @@ export default function Filters() {
     console.log(data);
   };
 
+  const deleteAllFilter = () => {
+    setCiudad("");
+    setDeporte("");
+    setServicios([]);
+    setMinimo(0);
+    setMaximo(0);
+  };
+
+  const deleteCityFilter = () => {
+    setCiudad("");
+  };
+
   return (
-    <aside className="w-80">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <aside className="w-80" >
+      <form onSubmit={handleSubmit(onSubmit)} >
         <div className="bg-color-button p-3 ">
           <h2>Canchas en Buenos Aires</h2>
-          <button className="text-xs">BORRAR FILTROS</button>
+          <button className="text-xs hover:underline" type="button" onClick={deleteAllFilter}>
+            BORRAR FILTROS
+          </button>
         </div>
         <div className="bg-color-text-black p-3 h-auto">
           <div className="flex flex-col">
             <div className="flex justify-between">
               <h2 className="text-white">Cuidad</h2>
-              <button className="text-white">reset</button>
+              <button
+                className="text-white hover:underline"
+                type="button"
+                onClick={deleteCityFilter}
+              >
+                reset
+              </button>
             </div>
             <select
               className="w-full px-2 py-1 rounded-md focus:outline-none"
@@ -151,7 +174,14 @@ export default function Filters() {
             </div>
           </div>
         </div>
-        <input className="cursor-pointer" type="submit" />
+        <div className="bg-color-text-black flex items-center justify-center p-2">
+          <button
+            className="cursor-pointer bg-[#D9D9D9] w-3/4 py-1 rounded-md"
+            type="submit"
+          >
+            Filtrar
+          </button>
+        </div>
       </form>
     </aside>
   );
