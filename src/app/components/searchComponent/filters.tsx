@@ -19,7 +19,6 @@ export default function Filters() {
     setServicios(data.servicios);
     setMinimo(data.minimo);
     setMaximo(data.maximo);
-    console.log(data);
   };
 
   const deleteAllFilter = () => {
