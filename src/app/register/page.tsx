@@ -26,26 +26,7 @@ const Register: React.FC<RegisterProps> = (props) => {
 
   const onSubmit = () => {
     router.push("/register2");
-  };
-  const router = useRouter(); //Agregado
-
-  const form = useRef<HTMLFormElement>(null);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
-    defaultValues: {
-      nombreYapellido: "",
-      email: "",
-      telefono: "",
-    },
-  });
-
-  const onSubmit = () => {
-    
-    router.push("/register2");
-  };
+  };  
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const phonePattern = /^[0-9]*$/;
