@@ -9,7 +9,24 @@ import { useRouter } from "next/navigation";
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = (props) => {
+  const router = useRouter(); //Agregado
 
+  const form = useRef<HTMLFormElement>(null);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      nombreYapellido: "",
+      email: "",
+      telefono: "",
+    },
+  });
+
+  const onSubmit = () => {
+    router.push("/register2");
+  };
   const router = useRouter(); //Agregado
 
   const form = useRef<HTMLFormElement>(null);
@@ -160,20 +177,19 @@ const Register: React.FC<RegisterProps> = (props) => {
               Nombre y Apellido *
             </label>
             <input
-  type="text"
-  id="nombreYapellido"
-  {...register("nombreYapellido", {
-    required: true,
-    minLength: 3,
-    maxLength: 30,
-    pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ\s\-']+$/,
-  })}
-  onPaste={(e) => e.preventDefault()} // Evita que se pueda pegar
-  className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
-    errors.nombreYapellido ? "border-red-700" : ""
-  }`}
-/>
-
+              type="text"
+              id="nombreYapellido"
+              {...register("nombreYapellido", {
+                required: true,
+                minLength: 3,
+                maxLength: 30,
+                pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ\s\-']+$/,
+              })}
+              onPaste={(e) => e.preventDefault()} // Evita que se pueda pegar
+              className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
+                errors.nombreYapellido ? "border-red-700" : ""
+              }`}
+            />
 
             {errors.nombreYapellido?.type === "minLength" && (
               <p className="text-red-700">
