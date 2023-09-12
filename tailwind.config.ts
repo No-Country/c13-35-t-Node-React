@@ -9,7 +9,10 @@ const config: Config = {
     theme: {
         extend: {
             backgroundImage: {
-                banner: "url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdXB3azU4ODA1MDQwLXdpa2ltZWRpYS1pbWFnZS1rb3dhd3d6ZS1remVtajVkby5qcGc.jpg')",
+                banner: "url('https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+                usercomments:
+                    "url(https://images.unsplash.com/photo-1565308674684-1d8c0b4433d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80)",
+                search: "url('https://images.pexels.com/photos/1171084/pexels-photo-1171084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
             },
             colors: {
                 "color-bg": "#FFFFFF",
