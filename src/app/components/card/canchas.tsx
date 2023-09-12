@@ -17,7 +17,8 @@ interface cancha {
 }
 
 export default function Canchas() {
-  const { deporte, setCanchas, ciudad, canchas } = useFiltersStore();
+  const { deporte, setCanchas, ciudad, canchas, minimo, maximo, servicios } =
+    useFiltersStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [orden, setOrden] = useState("relevante");
@@ -33,8 +34,36 @@ export default function Canchas() {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const data = await getCanchas(deporte, ciudad);
-        setTotalResults(data.length);
-        const paginatedData = data.slice(startIndex, endIndex);
+
+        
+        // Verifica si minimo y maximo están presentes y son números válidos
+        let canchasFiltradas = data.filter((cancha: any) => {
+          const precio = parseFloat(cancha.precio);
+          const minimoNumero = parseInt(minimo);
+          const maximoNumero = parseInt(maximo);
+        
+          return (
+            (!isNaN(minimoNumero) ? precio >= minimoNumero : true) &&
+            (!isNaN(maximoNumero) ? precio <= maximoNumero : true)
+          );
+        });
+
+        if (servicios.length > 0) {
+          canchasFiltradas = canchasFiltradas.filter((cancha: any) => {
+            const serviciosCancha = cancha.servicios && Array.isArray(cancha.servicios)
+              ? cancha.servicios.map((servicio: any) => servicio.toLowerCase())
+              : [];
+        
+            // Verifica si al menos uno de los servicios seleccionados está presente en serviciosCancha
+            return servicios.some((servicio: any) =>
+              serviciosCancha.includes(servicio.toLowerCase())
+            );
+          });
+        }
+        
+
+        setTotalResults(canchasFiltradas.length);
+        const paginatedData = canchasFiltradas.slice(startIndex, endIndex);
         setCanchas(paginatedData);
         setLoading(false);
         setError("");
@@ -43,19 +72,20 @@ export default function Canchas() {
         setLoading(false);
       }
     };
+
     if (!error) {
       fetchData();
       setError("");
     }
-  }, [deporte, ciudad, setCurrentPage, currentPage]);
+  }, [deporte, ciudad, setCurrentPage, currentPage, minimo, maximo, servicios]);
 
-  if (orden === "relevante") {
-    canchasOrdenadas.sort((a, b) => b.valoracion - a.valoracion);
-  } else if (orden === "menorPrecio") {
-    canchasOrdenadas.sort((a, b) => a.precio - b.precio);
-  } else if (orden === "mayorPrecio") {
-    canchasOrdenadas.sort((a, b) => b.precio - a.precio);
-  }
+  const ordenComparators: { [key: string]: (a: any, b: any) => number } = {
+    relevante: (a, b) => b.valoracion - a.valoracion,
+    menorPrecio: (a, b) => a.precio - b.precio,
+    mayorPrecio: (a, b) => b.precio - a.precio,
+  };
+
+  canchasOrdenadas.sort(ordenComparators[orden]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -98,6 +128,8 @@ export default function Canchas() {
           </>
         ) : error ? (
           <p>{error}</p>
+        ) : canchasOrdenadas.length === 0 ? (
+          <p>No hay canchas disponibles</p>
         ) : (
           canchasOrdenadas.map((cancha: cancha) => (
             <CardResult
