@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import emailjs from "@emailjs/browser";
 
+
 interface Register2Props {}
 
 const Register2: React.FC<Register2Props> = (props) => {
@@ -17,6 +18,7 @@ const Register2: React.FC<Register2Props> = (props) => {
   const togglePasswordRules = () => {
     setShowPasswordRules(!showPasswordRules);
   };
+
 
   const form = useRef<HTMLFormElement>(null);
   const {
@@ -30,29 +32,29 @@ const Register2: React.FC<Register2Props> = (props) => {
       confirmarContraseña: "",
     },
   });
-
-  const sendEmail = () => {
-    if (form.current) {
-      emailjs
-        .sendForm(
-          "service_703t9cg",
-          "template_ya20m5f",
-          form.current,
-          "l5gbij0EO5KK0gFQX"
-        )
-        .then((result) => {
-          console.log(result.text);
-        })
-        .catch((error) => {
-          console.log(error.text);
-        });
-    }
-  };
+   
+    const sendEmail = () => {
+      if (form.current) {
+        emailjs
+          .sendForm(
+            "service_703t9cg",
+            "template_ya20m5f",
+            form.current,
+            "l5gbij0EO5KK0gFQX"
+          )
+          .then((result) => {
+            console.log(result.text);
+          })
+          .catch((error) => {
+            console.log(error.text);
+          });
+      }
+    };
 
   const onSubmit = () => {
-    sendEmail();
-
-    router.push("/log-in");
+    sendEmail()
+  
+     router.push("/log-in");
   };
 
   return (
@@ -203,6 +205,7 @@ const Register2: React.FC<Register2Props> = (props) => {
               <p className="text-red-700">
                 El campo debe tener al menos 3 caracteres
               </p>
+              
             )}
             {errors.usuario?.type === "maxLength" && (
               <p className="text-red-700">
@@ -238,18 +241,19 @@ const Register2: React.FC<Register2Props> = (props) => {
               })}
               className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
                 errors.contraseña ? "border-red-700" : ""
-              }`}
-              onClick={togglePasswordRules}
+                }`}
+              onClick = { togglePasswordRules }
+
             />
             {showPasswordRules && (
-              <div className="tooltip text-xs">
+        <div className="tooltip text-xs">
                 - Entre 6 y 10 caracteres. <br />
                 - Al menos una mayúscula. <br />
                 - Al menos una minúscula. <br />
-                - Al menos un número. <br />- Al menos un caracter especial.
-                Listado aceptado: ! # $ % & ( ) * + - /? @ [ \ ] ^ _ [ | ].
-              </div>
-            )}
+                - Al menos un número. <br />
+                - Al menos un caracter especial. Listado aceptado: ! # $ % & ( ) * +  - /? @ [ \ ] ^ _ [ | ].
+        </div>
+      )}
 
             {errors.contraseña?.type === "minLength" && (
               <p className="text-red-700">

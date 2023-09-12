@@ -5,6 +5,7 @@ import NavBar from './components/navBar/navBar'
 import Register from './register/page'
 import Head from 'next/head';
 
+import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,8 @@ export default function RootLayout({
         </Head>
         <NavBar />
         {children}
+      
+        <Footer />
       </body>
     </html>
   )

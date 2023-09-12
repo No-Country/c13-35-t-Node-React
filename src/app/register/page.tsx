@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,6 +25,25 @@ const Register: React.FC<RegisterProps> = (props) => {
   });
 
   const onSubmit = () => {
+    router.push("/register2");
+  };
+  const router = useRouter(); //Agregado
+
+  const form = useRef<HTMLFormElement>(null);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      nombreYapellido: "",
+      email: "",
+      telefono: "",
+    },
+  });
+
+  const onSubmit = () => {
+    
     router.push("/register2");
   };
 
@@ -149,11 +168,7 @@ const Register: React.FC<RegisterProps> = (props) => {
           </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          ref={form}
-          className="flex flex-col gap-1 mt-5"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} ref={form} className="flex flex-col gap-1 mt-5">
           <div>
             <label
               htmlFor="nombreYapellido"
@@ -259,22 +274,23 @@ const Register: React.FC<RegisterProps> = (props) => {
               </p>
             )}
           </div>
+        
+        <div className="mt-4 text-right">
+          <button
+            className={`rounded-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal w-32 py-2 px-4 my-1 ${
+              Object.keys(errors).length > 0
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+            disabled={Object.keys(errors).length > 0}
+          >
+            <div className="flex justify-between">
+              <p>Siguiente</p> &gt;
+            </div>
+          </button>
+        </div>
 
-          <div className="mt-4 text-right">
-            <button
-              className={`rounded-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal w-32 py-2 px-4 my-1 ${
-                Object.keys(errors).length > 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""
-              }`}
-              disabled={Object.keys(errors).length > 0}
-            >
-              <div className="flex justify-between">
-                <p>Siguiente</p> &gt;
-              </div>
-            </button>
-          </div>
-        </form>
+        </form>  
 
         <div className="flex flex-row items-center justify-center gap-4 my-2">
           <div className="h-0.5 bg-black mt-1 w-full"></div>
@@ -328,6 +344,8 @@ const Register: React.FC<RegisterProps> = (props) => {
           />
         </div>
       </div>
+
+      
     </div>
   );
 };
