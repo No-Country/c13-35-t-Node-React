@@ -4,19 +4,26 @@ import { useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
+import { IoIosAlert } from "react-icons/io";
 
 interface Register2Props {}
 
 const Register2: React.FC<Register2Props> = (props) => {
     const router = useRouter(); //Agregado
 
+    const searchParams = useSearchParams();
+    const name = searchParams.get("name");
+    const email = searchParams.get("email");
+    const phone = searchParams.get("phone");
+
     const [showPasswordRules, setShowPasswordRules] = useState(false);
 
     const togglePasswordRules = () => {
         setShowPasswordRules(!showPasswordRules);
     };
+
 
     const form = useRef<HTMLFormElement>(null);
     const {
@@ -25,8 +32,8 @@ const Register2: React.FC<Register2Props> = (props) => {
         handleSubmit,
     } = useForm({
         defaultValues: {
-            usuario: "",
-            contraseña: "",
+            username: "",
+            password: "",
             confirmarContraseña: "",
         },
     });
@@ -49,18 +56,52 @@ const Register2: React.FC<Register2Props> = (props) => {
         }
     };
 
-    const onSubmit = () => {
-        sendEmail();
+      const [username, setUserName] = useState("");
+    const [password, setPassword] = useState("");
 
-        router.push("/log-in");
+    const onSubmit = async () => {
+            sendEmail();
+
+      try {
+               const response = await fetch(
+                "https://goolbooking-api.onrender.com/auth/registro",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                        username,
+                        password,
+                    }),
+                }
+            )
+                .then((response) => {
+                    if (response.ok) {
+                        // API request was successful, you can redirect or perform other actions here
+                        console.log(response.json());
+                        router.push("/login");
+                      } else {
+                        // Handle the case where the API request failed
+                        console.log(response.json());
+                        console.error("API request failed");
+                    }
+                })
+                .catch((e) => console.error(e));
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
-        <div className="flex flex-row mx-44 font-inriasans h-full justify-center">
+        <div className="flex flex-row font-inriasans h-full justify-center">
             {/* seccion izquierda (formulario y botones) */}
-            <div className="w-[420px] h-full p-8 bg-color-form-bg">
+            <div className="w-[604px] p-8 bg-color-form-bg flex-none">
                 <div className="w-full h-82">
-                    <h2 className=" text-color-text-black font-semibold text-2xl my-5 ml-6">
+                    <h2 className=" text-color-text-black font-semibold text-2xl my-5 ml-8">
                         REGISTRATE
                     </h2>
                 </div>
@@ -113,7 +154,6 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </svg>
                             </div>
                         </div>
-
                         <div className="flex flex-row justify-center mb-3 align-center gap-2">
                             <div className="m-auto">
                                 <svg
@@ -151,7 +191,6 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </svg>
                             </div>
                         </div>
-
                         <div className="flex flex-row justify-center mb-3 align-center gap-2">
                             <div className="m-auto">
                                 <svg
@@ -171,6 +210,98 @@ const Register2: React.FC<Register2Props> = (props) => {
                             </div>
                         </div>
 
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
                         <div className="flex flex-row justify-center mb-3 align-center gap-2">
                             <div className="m-auto">
                                 <svg
@@ -202,222 +333,250 @@ const Register2: React.FC<Register2Props> = (props) => {
                         </div>
                     </div>
                 </div>
-
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    ref={form}
-                    className="flex flex-col gap-1 mt-5"
-                >
-                    <div className="">
-                        <label
-                            htmlFor="usuario"
-                            className="text-black text-left font-semibold text-base my-5"
-                        >
-                            Usuario *
-                        </label>
-                        <input
-                            id="usuario"
-                            type="text"
-                            {...register("usuario", {
-                                required: true,
-                                minLength: 3,
-                                maxLength: 20,
-                                pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ0-9\s\-']+$/,
-                            })}
-                            className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
-                                errors.usuario ? "border-red-700" : ""
-                            }`}
-                        />
-
-                        {errors.usuario?.type === "minLength" && (
-                            <p className="text-red-700">
-                                El campo debe tener al menos 3 caracteres
-                            </p>
-                        )}
-                        {errors.usuario?.type === "maxLength" && (
-                            <p className="text-red-700">
-                                El campo debe tener menos de 20 caracteres
-                            </p>
-                        )}
-                        {errors.usuario?.type === "pattern" && (
-                            <p className="text-red-700">
-                                El usuario es incorrecto. Por favor,
-                                reingréselo.
-                            </p>
-                        )}
-                        {errors.usuario?.type === "required" && (
-                            <p className="text-red-700">
-                                Falta completar el usuario
-                            </p>
-                        )}
-                    </div>
-
-                    <div className="">
-                        <label
-                            className="text-black text-left font-semibold text-base my-5"
-                            htmlFor="contraseña"
-                        >
-                            Contraseña *
-                        </label>
-                        <input
-                            id="contraseña"
-                            type="password"
-                            {...register("contraseña", {
-                                required: true,
-                                minLength: 6,
-                                maxLength: 10,
-                                pattern:
-                                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-                            })}
-                            className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
-                                errors.contraseña ? "border-red-700" : ""
-                            }`}
-                            onClick={togglePasswordRules}
-                        />
-                        {showPasswordRules && (
-                            <div className="tooltip text-xs">
-                                - Entre 6 y 10 caracteres. <br />
-                                - Al menos una mayúscula. <br />
-                                - Al menos una minúscula. <br />
-                                - Al menos un número. <br />- Al menos un
-                                caracter especial. Listado aceptado: ! # $ % & (
-                                ) * + - /? @ [ \ ] ^ _ [ | ].
-                            </div>
-                        )}
-
-                        {errors.contraseña?.type === "minLength" && (
-                            <p className="text-red-700">
-                                La contraseña debe tener al menos 6 caracteres
-                            </p>
-                        )}
-                        {errors.contraseña?.type === "maxLength" && (
-                            <p className="text-red-700">
-                                La contraseña debe tener menos de 10 caracteres
-                            </p>
-                        )}
-                        {errors.contraseña?.type === "pattern" && (
-                            <p className="text-red-700">
-                                La contraseña no cumple con las reglas. Por
-                                favor, ingrese una contraseña correcta.
-                            </p>
-                        )}
-                        {errors.contraseña?.type === "required" && (
-                            <p className="text-red-700">
-                                Falta completar la contraseña
-                            </p>
-                        )}
-                    </div>
-
-                    <div>
-                        <label
-                            className="text-black text-left font-semibold text-base my-5"
-                            htmlFor="confirmarContraseña"
-                        >
-                            Confirmar Contraseña *
-                        </label>
-                        <input
-                            id="confirmarContraseña"
-                            type="password"
-                            {...register("contraseña", {
-                                required: true,
-                                minLength: 6,
-                                maxLength: 10,
-                                pattern:
-                                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-                            })}
-                            className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black ${
-                                errors.confirmarContraseña
-                                    ? "border-red-700"
-                                    : ""
-                            }`}
-                        />
-
-                        {errors.confirmarContraseña?.type === "minLength" && (
-                            <p className="text-red-700">
-                                La contraseña debe tener al menos 6 caracteres
-                            </p>
-                        )}
-                        {errors.confirmarContraseña?.type === "maxLength" && (
-                            <p className="text-red-700">
-                                La contraseña debe tener menos de 10 caracteres
-                            </p>
-                        )}
-                        {errors.confirmarContraseña?.type === "pattern" && (
-                            <p className="text-red-700">
-                                La contraseña no cumple con las reglas. Por
-                                favor, ingrese una contraseña correcta.
-                            </p>
-                        )}
-                        {errors.confirmarContraseña?.type === "validate" && (
-                            <p className="text-red-700">
-                                La contraseña no coincide. Por favor, reingrese
-                                la contraseña.
-                            </p>
-                        )}
-                        {errors.confirmarContraseña?.type === "required" && (
-                            <p className="text-red-700">
-                                Falta confirmar la contraseña
-                            </p>
-                        )}
-                    </div>
-
-                    <div className="mt-4 text-right">
-                        <button className="rounded-full w-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal py-2 px-4 my-1">
-                            Registrate
-                        </button>
-                    </div>
-                </form>
-
-                <div className="flex flex-row items-center justify-center gap-4 my-2">
-                    <div className="h-0.5 bg-black mt-1 w-full"></div>
-                    <div>
-                        <Image
-                            src={"./emojione-monotone_soccer-ball.svg"}
-                            width={50}
-                            height={50}
-                            className="mt-1"
-                            alt="soccer ball picture"
-                        />
-                    </div>
-                    <div className="h-0.5 bg-black mt-1 w-full"></div>
-                </div>
-                <div className="mt-4 block m-auto">
-                    <button className="flex justify-center rounded-full bg-white p-2 my-4 border-2 border-color-button  text-color-button leading-8 w-full ">
-                        <div className="flex content-between">
-                            <Image
-                                src={"./flat-color-icons_google.svg"}
-                                width={30}
-                                height={30}
-                                className="mr-1"
-                                alt={""}
+                <div className="m-auto w-[420px] mt-10">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        ref={form}
+                        className="flex flex-col gap-1 my-5"
+                    >
+                        <div className="my-2">
+                            <label
+                                htmlFor="username"
+                                className="text-black text-left font-semibold text-base my-5"
+                            >
+                                Usuario *
+                            </label>
+                            <input
+                                id="username"
+                                type="text"
+                                {...register("username", {
+                                    required: true,
+                                    minLength: 3,
+                                    maxLength: 20,
+                                    pattern: /^[a-zA-ZáéíóúüÁÉÍÓÚÜ0-9\s\-']+$/,
+                                })}
+                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                    errors.username ? "border-red-700" : ""
+                                }`}
+                                value={username}
+                                onChange={(e) => setUserName(e.target.value)}
+                                name="username"
                             />
-                            <div>Continuar con Google</div>
+
+                            {errors.username?.type === "minLength" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        El campo debe tener al menos 3
+                                        caracteres
+                                    </p>
+                                </div>
+                            )}
+                            {errors.username?.type === "maxLength" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        El campo debe tener menos de 20
+                                        caracteres
+                                    </p>
+                                </div>
+                            )}
+                            {errors.username?.type === "pattern" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        El usuario es incorrecto. Por favor,
+                                        reingréselo.
+                                    </p>
+                                </div>
+                            )}
+                            {errors.username?.type === "required" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        Falta completar el usuario
+                                    </p>
+                                </div>
+                            )}
                         </div>
-                    </button>
-                    <div className="flex justify-center">
-                        <p className="text-black  text-base font-normal leading-13.75">
-                            {" "}
-                            ¿Ya tienes una cuenta?
-                            <Link href="/log-in">
-                                <span className="text-blue-500  font-normal text-base leading-14 ml-1">
-                                    Inicia sesión
-                                </span>
-                            </Link>
-                        </p>
+
+                        <div className="my-2">
+                            <label
+                                className="text-black text-left font-semibold text-base my-5"
+                                htmlFor="contraseña"
+                            >
+                                Contraseña *
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                {...register("password", {
+                                    required: true,
+                                    minLength: 6,
+                                    maxLength: 10,
+                                    pattern:
+                                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+                                })}
+                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                    errors.password ? "border-red-700" : ""
+                                }`}
+                                onClick={togglePasswordRules}
+                            />
+                            {showPasswordRules && (
+                                <div className="tooltip text-xs">
+                                    - Entre 6 y 10 caracteres. <br />
+                                    - Al menos una mayúscula. <br />
+                                    - Al menos una minúscula. <br />
+                                    - Al menos un número. <br />- Al menos un
+                                    caracter especial. Listado aceptado: ! # $ %
+                                    & ( ) * + - /? @ [ \ ] ^ _ [ | ].
+                                </div>
+                            )}
+
+                            {errors.password?.type === "minLength" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña debe tener al menos 6
+                                        caracteres
+                                    </p>
+                                </div>
+                            )}
+                            {errors.password?.type === "maxLength" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña debe tener menos de 10
+                                        caracteres
+                                    </p>
+                                </div>
+                            )}
+                            {errors.password?.type === "pattern" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña no cumple con las reglas.
+                                        Por favor, ingrese una contraseña
+                                        correcta.
+                                    </p>
+                                </div>
+                            )}
+                            {errors.password?.type === "required" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        Falta completar la contraseña
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="my-2">
+                            <label
+                                className="text-black text-left font-semibold text-base my-5"
+                                htmlFor="confirmarContraseña"
+                            >
+                                Confirmar Contraseña *
+                            </label>
+                            <input
+                                id="confirmarContraseña"
+                                type="password"
+                                {...register("password", {
+                                    required: true,
+                                    minLength: 6,
+                                    maxLength: 10,
+                                    pattern:
+                                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+                                })}
+                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                    errors.confirmarContraseña
+                                        ? "border-red-700"
+                                        : ""
+                                }`}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
+                            />
+                            {errors.confirmarContraseña?.type ===
+                                "validate" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña no coincide. Por favor,
+                                        reingrese la contraseña.
+                                    </p>
+                                </div>
+                            )}
+                            {errors.confirmarContraseña?.type ===
+                                "required" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        Falta confirmar la contraseña
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="mt-4 text-right">
+                            <button className="rounded-full w-full border-2 border-solid border-color-button bg-color-button text-white font-roboto text-md font-normal py-2 px-4 my-1 hover:bg-color-button-hover">
+                                Registrate
+                            </button>
+                        </div>
+                    </form>
+
+                    <div className="flex flex-row items-center justify-center gap-4 my-2">
+                        <div className="h-0.5 bg-black mt-1 w-full"></div>
+                        <div>
+                            <Image
+                                src={"./emojione-monotone_soccer-ball.svg"}
+                                width={50}
+                                height={50}
+                                className="mt-1"
+                                alt="soccer ball picture"
+                            />
+                        </div>
+                        <div className="h-0.5 bg-black mt-1 w-full"></div>
+                    </div>
+                    <div className="mt-4 block m-auto">
+                        <button className="flex justify-center rounded-full bg-white p-2 my-4 border-2 border-color-button  text-color-button leading-8 w-full ">
+                            <div className="flex content-between">
+                                <Image
+                                    src={"./flat-color-icons_google.svg"}
+                                    width={30}
+                                    height={30}
+                                    className="mr-1"
+                                    alt={""}
+                                />
+                                <div>Continuar con Google</div>
+                            </div>
+                        </button>
+                        <div className="flex justify-center">
+                            <p className="text-black  text-base font-normal leading-13.75">
+                                {" "}
+                                ¿Ya tienes una cuenta?
+                                <Link href="/login">
+                                    <span className="text-blue-500  font-normal text-base leading-14 ml-1">
+                                        Inicia sesión
+                                    </span>
+                                </Link>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* seccion derecha (imagen) */}
+            {/* seccion derecha (imagen) */}
 
-            <div className="flex bg-gray-100">
-                <div className="bg-lightgray bg-cover bg-center relative">
+            <div className="flex bg-gray-100 h-full overflow-hidden relative">
+                <div className="bg-lightgray bg-cover bg-center w-full h-full">
                     <Image
                         src={"/fotoCancha.jpg"}
                         alt="Imagen cancha"
-                        width={653}
-                        height={625}
-                        priority
+                        width={840}
+                        height={600}
+                        className="object-cover"
                     />
                 </div>
             </div>
@@ -426,3 +585,4 @@ const Register2: React.FC<Register2Props> = (props) => {
 };
 
 export default Register2;
+
