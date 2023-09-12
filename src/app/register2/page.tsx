@@ -24,6 +24,7 @@ const Register2: React.FC<Register2Props> = (props) => {
         setShowPasswordRules(!showPasswordRules);
     };
 
+
     const form = useRef<HTMLFormElement>(null);
     const {
         register,
@@ -55,14 +56,14 @@ const Register2: React.FC<Register2Props> = (props) => {
         }
     };
 
-    const [username, setUserName] = useState("");
+      const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
     const onSubmit = async () => {
-        sendEmail();
+            sendEmail();
 
-        try {
-            const response = await fetch(
+      try {
+               const response = await fetch(
                 "https://goolbooking-api.onrender.com/auth/registro",
                 {
                     method: "POST",
@@ -83,7 +84,7 @@ const Register2: React.FC<Register2Props> = (props) => {
                         // API request was successful, you can redirect or perform other actions here
                         console.log(response.json());
                         router.push("/login");
-                    } else {
+                      } else {
                         // Handle the case where the API request failed
                         console.log(response.json());
                         console.error("API request failed");
@@ -153,7 +154,6 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </svg>
                             </div>
                         </div>
-
                         <div className="flex flex-row justify-center mb-3 align-center gap-2">
                             <div className="m-auto">
                                 <svg
@@ -191,7 +191,6 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 </svg>
                             </div>
                         </div>
-
                         <div className="flex flex-row justify-center mb-3 align-center gap-2">
                             <div className="m-auto">
                                 <svg
@@ -211,6 +210,98 @@ const Register2: React.FC<Register2Props> = (props) => {
                             </div>
                         </div>
 
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row justify-center mb-3 align-center gap-2">
+                            <div className="m-auto">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="5"
+                                    height="6"
+                                    viewBox="0 0 5 6"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="2"
+                                        cy="2"
+                                        r="2.5"
+                                        fill="#F3F5F7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
                         <div className="flex flex-row justify-center mb-3 align-center gap-2">
                             <div className="m-auto">
                                 <svg
@@ -476,6 +567,7 @@ const Register2: React.FC<Register2Props> = (props) => {
             </div>
 
             {/* seccion derecha (imagen) */}
+            {/* seccion derecha (imagen) */}
 
             <div className="flex bg-gray-100 h-full overflow-hidden relative">
                 <div className="bg-lightgray bg-cover bg-center w-full h-full">
@@ -493,3 +585,4 @@ const Register2: React.FC<Register2Props> = (props) => {
 };
 
 export default Register2;
+

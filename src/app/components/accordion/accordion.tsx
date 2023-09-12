@@ -21,7 +21,7 @@ const Accordion: React.FC<accordionProps> = (props) => {
                     type="button"
                     className="border-b-2 border-color-text-black w-full flex justify-between items-center"
                 >
-                    <p className="text-left text-lg font-bold my-5">
+                    <p className="text-left text-xl font-bold my-5">
                         {props.title}
                     </p>
                     <div className="text-color-button-hover text-3xl flex items-center">
@@ -32,7 +32,7 @@ const Accordion: React.FC<accordionProps> = (props) => {
                 </button>
 
                 <div
-                    className="text-xl text-left my-5"
+                    className="text-base text-left my-5"
                     style={{
                         display: isShowing ? "block" : "none",
                     }}
