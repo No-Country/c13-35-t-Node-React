@@ -2,12 +2,12 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ImageLogin from "../../../public/ImageLogin.png";
 import { useContext, useState } from "react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { IoIosAlert } from "react-icons/io";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 interface LoginProps {}
 const Login: React.FC<LoginProps> = (props) => {
@@ -100,6 +100,12 @@ const Login: React.FC<LoginProps> = (props) => {
         setShowPasswordRules(!showPasswordRules);
     };
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="flex flex-row font-inriasans h-full justify-center">
             {/* seccion izquierda (imagen) */}
@@ -107,10 +113,10 @@ const Login: React.FC<LoginProps> = (props) => {
             <div className="flex bg-gray-100 h-full overflow-hidden relative">
                 <div className="bg-lightgray bg-cover bg-center w-full h-full">
                     <Image
-                        src={ImageLogin}
+                        src="/ImageLogin.png"
                         alt="Imagen cancha"
-                        width={833}
-                        height={712}
+                        width={840}
+                        height={600}
                         className="object-cover"
                     />
                 </div>
@@ -182,25 +188,37 @@ const Login: React.FC<LoginProps> = (props) => {
                         <div className="my-3">
                             <label
                                 className="text-black text-left font-semibold text-base my-5"
-                                htmlFor="contraseña"
+                                htmlFor="password"
                             >
                                 Contraseña *
                             </label>
-                            <input
-                                id="password"
-                                type="password"
-                                {...register("password", {
-                                    required: true,
-                                    minLength: 6,
-                                    maxLength: 10,
-                                    pattern:
-                                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-                                })}
-                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                    errors.password ? "border-red-700" : ""
-                                }`}
-                                onClick={togglePasswordRules}
-                            />
+
+                            <div className="relative">
+                                <input
+                                    id="password"
+                                    type={showPassword ? "text" : "password"}
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 10,
+                                        pattern:
+                                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+                                    })}
+                                    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                        errors.password ? "border-red-700" : ""
+                                    }`}
+                                />
+                                <div
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? (
+                                        <AiFillEyeInvisible />
+                                    ) : (
+                                        <AiFillEye />
+                                    )}
+                                </div>
+                            </div>
                             {showPasswordRules && (
                                 <div className="tooltip text-xs">
                                     - Entre 6 y 10 caracteres. <br />
