@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useFiltersStore from "../../search/filtersState";
 
@@ -19,7 +18,6 @@ export default function Filters() {
     setServicios(data.servicios);
     setMinimo(data.minimo);
     setMaximo(data.maximo);
-    console.log(data);
   };
 
   const deleteAllFilter = () => {
