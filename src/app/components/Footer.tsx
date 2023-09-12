@@ -10,12 +10,11 @@ import { AiOutlineMail } from 'react-icons/ai';
 
 function Footer() {
   return (
-    <footer className='h-80 text-white p-5 w-full relative'>
+    <footer className='h-80 text-white p-5 w-full relative font-inriasans'>
       <div
         className='bg-cover bg-center w-full h-full absolute top-0 left-0'
         style={{
-          backgroundImage: 'url(../../assets/footer-image.jpg)',
-          opacity: '0.3',
+          backgroundImage: 'url(../../assets/Footer-oscuro.png)',
           zIndex: '-1',
         }}
       ></div>
