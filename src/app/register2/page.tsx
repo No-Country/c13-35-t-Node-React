@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import { IoIosAlert } from "react-icons/io";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 interface Register2Props {}
 
@@ -19,9 +20,23 @@ const Register2: React.FC<Register2Props> = (props) => {
     const phone = searchParams.get("phone");
 
     const [showPasswordRules, setShowPasswordRules] = useState(false);
+    const [showPassword1, setShowPassword1] = useState(false);
+    const [showPassword2, setShowPassword2] = useState(false);
+
+    // Create separate state variables for passwords
+    const [password1, setPassword1] = useState("");
+    const [password2, setPassword2] = useState("");
 
     const togglePasswordRules = () => {
         setShowPasswordRules(!showPasswordRules);
+    };
+
+    const togglePasswordVisibility1 = () => {
+        setShowPassword1(!showPassword1);
+    };
+
+    const togglePasswordVisibility2 = () => {
+        setShowPassword2(!showPassword2);
     };
 
     const form = useRef<HTMLFormElement>(null);
@@ -266,7 +281,8 @@ const Register2: React.FC<Register2Props> = (props) => {
                                 })}
                                 className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
                                     errors.username ? "border-red-700" : ""
-                                }`}
+                                }
+                                `}
                                 value={username}
                                 onChange={(e) => setUserName(e.target.value)}
                                 name="username"
@@ -312,25 +328,42 @@ const Register2: React.FC<Register2Props> = (props) => {
                         <div className="my-2">
                             <label
                                 className="text-black text-left font-semibold text-base my-5"
-                                htmlFor="contraseña"
+                                htmlFor="password1"
                             >
                                 Contraseña *
                             </label>
-                            <input
-                                id="password"
-                                type="password"
-                                {...register("password", {
-                                    required: true,
-                                    minLength: 6,
-                                    maxLength: 10,
-                                    pattern:
-                                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-                                })}
-                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                    errors.password ? "border-red-700" : ""
-                                }`}
-                                onClick={togglePasswordRules}
-                            />
+
+                            <div className="relative">
+                                <input
+                                    id="password1"
+                                    type={showPassword1 ? "text" : "password"}
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 10,
+                                        pattern:
+                                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+                                    })}
+                                    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                        errors.password ? "border-red-700" : ""
+                                    }`}
+                                    value={password1}
+                                    onChange={(e) =>
+                                        setPassword1(e.target.value)
+                                    }
+                                    name="password1"
+                                />
+                                <div
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                                    onClick={togglePasswordVisibility1}
+                                >
+                                    {showPassword1 ? (
+                                        <AiFillEyeInvisible />
+                                    ) : (
+                                        <AiFillEye />
+                                    )}
+                                </div>
+                            </div>
                             {showPasswordRules && (
                                 <div className="tooltip text-xs">
                                     - Entre 6 y 10 caracteres. <br />
@@ -383,29 +416,44 @@ const Register2: React.FC<Register2Props> = (props) => {
                         <div className="my-2">
                             <label
                                 className="text-black text-left font-semibold text-base my-5"
-                                htmlFor="confirmarContraseña"
+                                htmlFor="password2"
                             >
                                 Confirmar Contraseña *
                             </label>
-                            <input
-                                id="confirmarContraseña"
-                                type="password"
-                                {...register("password", {
-                                    required: true,
-                                    minLength: 6,
-                                    maxLength: 10,
-                                    pattern:
-                                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
-                                })}
-                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
-                                    errors.confirmarContraseña
-                                        ? "border-red-700"
-                                        : ""
-                                }`}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                name="password"
-                            />
+                            <div className="relative">
+                                <input
+                                    id="password2"
+                                    type={showPassword2 ? "text" : "password"}
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 10,
+                                        pattern:
+                                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+                                    })}
+                                    className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                        errors.confirmarContraseña
+                                            ? "border-red-700"
+                                            : ""
+                                    }`}
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    name="password"
+                                />
+                                <div
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                                    onClick={togglePasswordVisibility2}
+                                >
+                                    {showPassword2 ? (
+                                        <AiFillEyeInvisible />
+                                    ) : (
+                                        <AiFillEye />
+                                    )}
+                                </div>
+                            </div>
+
                             {errors.confirmarContraseña?.type ===
                                 "validate" && (
                                 <div className="inline-flex justify-start items-center">
