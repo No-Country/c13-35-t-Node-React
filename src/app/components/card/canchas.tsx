@@ -48,6 +48,7 @@ export default function Canchas() {
           );
         });
 
+        // Verifica si por lo menos a un servicio fue seleccionado
         if (servicios.length > 0) {
           canchasFiltradas = canchasFiltradas.filter((cancha: any) => {
             const serviciosCancha = cancha.servicios && Array.isArray(cancha.servicios)
@@ -61,7 +62,6 @@ export default function Canchas() {
           });
         }
         
-
         setTotalResults(canchasFiltradas.length);
         const paginatedData = canchasFiltradas.slice(startIndex, endIndex);
         setCanchas(paginatedData);
@@ -79,14 +79,15 @@ export default function Canchas() {
     }
   }, [deporte, ciudad, setCurrentPage, currentPage, minimo, maximo, servicios]);
 
+  // Ordena las canchas según el criterio seleccionado
   const ordenComparators: { [key: string]: (a: any, b: any) => number } = {
     relevante: (a, b) => b.valoracion - a.valoracion,
     menorPrecio: (a, b) => a.precio - b.precio,
     mayorPrecio: (a, b) => b.precio - a.precio,
   };
-
   canchasOrdenadas.sort(ordenComparators[orden]);
 
+  // Cambia la página actual
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
