@@ -94,6 +94,12 @@ const Login: React.FC<LoginProps> = (props) => {
         router.push("/");
     };
 
+    const [showPasswordRules, setShowPasswordRules] = useState(false);
+
+    const togglePasswordRules = () => {
+        setShowPasswordRules(!showPasswordRules);
+    };
+
     return (
         <div className="flex flex-row font-inriasans h-full justify-center">
             {/* seccion izquierda (imagen) */}
@@ -168,7 +174,7 @@ const Login: React.FC<LoginProps> = (props) => {
                                 <div className="inline-flex justify-start items-center">
                                     <IoIosAlert className=" text-[#B40000] mr-2" />
                                     <p className="text-red-700">
-                                        Falta completar el Usuario
+                                        Falta completar el nombre de usuario
                                     </p>
                                 </div>
                             )}
@@ -181,10 +187,67 @@ const Login: React.FC<LoginProps> = (props) => {
                                 Contraseña *
                             </label>
                             <input
-                                id="contraseña"
+                                id="password"
                                 type="password"
-                                className="flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border"
+                                {...register("password", {
+                                    required: true,
+                                    minLength: 6,
+                                    maxLength: 10,
+                                    pattern:
+                                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&()*+\/?@\[\]^_{|}])[A-Za-z\d!#$%&()*+\/?@\[\]^_{|}]+$/,
+                                })}
+                                className={`flex items-center w-full px-5 py-2 rounded-full text-gray-700 outline-none focus:border-black focus:border ${
+                                    errors.password ? "border-red-700" : ""
+                                }`}
+                                onClick={togglePasswordRules}
                             />
+                            {showPasswordRules && (
+                                <div className="tooltip text-xs">
+                                    - Entre 6 y 10 caracteres. <br />
+                                    - Al menos una mayúscula. <br />
+                                    - Al menos una minúscula. <br />
+                                    - Al menos un número. <br />- Al menos un
+                                    caracter especial. Listado aceptado: ! # $ %
+                                    & ( ) * + - /? @ [ \ ] ^ _ [ | ].
+                                </div>
+                            )}
+
+                            {errors.password?.type === "minLength" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña debe tener al menos 6
+                                        caracteres
+                                    </p>
+                                </div>
+                            )}
+                            {errors.password?.type === "maxLength" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña debe tener menos de 10
+                                        caracteres
+                                    </p>
+                                </div>
+                            )}
+                            {errors.password?.type === "pattern" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        La contraseña no cumple con las reglas.
+                                        Por favor, ingrese una contraseña
+                                        correcta.
+                                    </p>
+                                </div>
+                            )}
+                            {errors.password?.type === "required" && (
+                                <div className="inline-flex justify-start items-center">
+                                    <IoIosAlert className=" text-[#B40000] mr-2" />
+                                    <p className="text-red-700">
+                                        Falta completar la contraseña
+                                    </p>
+                                </div>
+                            )}
                         </div>
                         <div className="mt-4 text-right">
                             <button
@@ -200,7 +263,7 @@ const Login: React.FC<LoginProps> = (props) => {
                             </button>
                         </div>
                     </form>
-                    
+
                     <div className="flex justify-center my-5">
                         <p className="text-black text-base font-normal">
                             {" "}
