@@ -1,6 +1,7 @@
 import express from "express";
 import { fieldRouter } from "./routes/field.js";
-import { corsMiddleware } from "./middlewares/cors.js";
+// import { corsMiddleware } from "./middlewares/cors.js";
+import cors from "cors";
 
 
 const app = express()
@@ -9,7 +10,7 @@ import authRoutes from './controllers/authController.js';
 //App middlewares
 app.disable("x-powered-by")
 app.use(express.json())
-app.use(corsMiddleware())
+app.use(cors())
 
 
 //App routes
