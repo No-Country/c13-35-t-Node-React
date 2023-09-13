@@ -12,11 +12,11 @@ import Select, {
     SingleValueProps,
     OptionProps,
 } from "react-select";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker, {
     DayValue,
     RenderInputProps,
-} from "react-modern-calendar-datepicker";
+} from '@hassanmojab/react-modern-calendar-datepicker';
 import ClientOpinion from "./components/clientOpinionContainer/clientOpinion";
 import Accordion from "./components/accordion/accordion";
 import { FaLocationDot, FaCalendarDays } from "react-icons/fa6";
