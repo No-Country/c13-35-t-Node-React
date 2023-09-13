@@ -21,7 +21,6 @@ router.post('/registro',
     validatePhone(),
     validateUsername(),
     validatePassword(),
-    validateConfirmPassword(),
     async (req, res) => {
         try {
             const errors = validationResult(req);
