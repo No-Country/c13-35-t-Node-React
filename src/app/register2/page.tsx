@@ -95,13 +95,18 @@ const Register2: React.FC<Register2Props> = (props) => {
             )
                 .then((response) => {
                     if (response.ok) {
-                        // API request was successful, you can redirect or perform other actions here
-                        console.log(response.json());
-                        router.push("/login");
+                        response.json().then((data) => {
+                            // Access the "message" property and log it
+                            console.log(data.message);
+
+                            // Perform other actions here, like redirecting
+                            router.push("/login");
+                        });
                     } else {
-                        // Handle the case where the API request failed
-                        console.log(response.json());
-                        console.error("API request failed");
+                        response.json().then((data) => {
+                            // Handle the case where the API request failed
+                            console.error("API request failed:", data.message);
+                        });
                     }
                 })
                 .catch((e) => console.error(e));
