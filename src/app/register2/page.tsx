@@ -27,9 +27,11 @@ const Register2: React.FC<Register2Props> = (props) => {
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
 
-    const togglePasswordRules = () => {
-        setShowPasswordRules(!showPasswordRules);
-    };
+
+  const togglePasswordRules = () => {
+    setShowPasswordRules(!showPasswordRules);
+  };
+
 
     const togglePasswordVisibility1 = () => {
         setShowPassword1(!showPassword1);
@@ -543,6 +545,7 @@ const Register2: React.FC<Register2Props> = (props) => {
             </div>
         </div>
     );
+
 };
 
 export default Register2;

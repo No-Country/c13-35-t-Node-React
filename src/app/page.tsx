@@ -1,118 +1,394 @@
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
+import Select, {
+  components,
+  SingleValueProps,
+  OptionProps,
+} from "react-select";
+import ClientOpinion from "./components/clientOpinionContainer/clientOpinion";
+import Accordion from "./components/accordion/accordion";
+import { FaLocationDot, FaCalendarDays } from "react-icons/fa6";
+import axios from "axios";
+
+const CustomOption: React.FC<OptionProps<any>> = ({ innerProps, label }) => (
+  <div className="m-3" {...innerProps}>
+    {label}
+  </div>
+);
+
+const CustomSingleValue: React.FC<SingleValueProps<any>> = ({
+  children,
+  ...props
+}) => (
+  <components.SingleValue {...props}>
+    <div className="inline-flex justify-start items-center">
+      <FaLocationDot className="mr-2 text-color-button text-xl" />
+      {children}
+    </div>
+  </components.SingleValue>
+);
+
+type CityOption = {
+  value: string;
+  label: string;
+};
 
 export default function Home() {
-    return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-                <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-                    Get started by editing&nbsp;
-                    <code className="font-mono font-bold">
-                        src/app/page.tsx
-                    </code>
-                </p>
-                <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-                    <a
-                        className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-                        href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        By{" "}
-                        <Image
-                            src="/vercel.svg"
-                            alt="Vercel Logo"
-                            className="dark:invert"
-                            width={100}
-                            height={24}
-                            priority
-                        />
-                    </a>
+  const faqData = [
+    {
+      question: "¿Cómo puedo reservar un espacio deportivo en línea?",
+      answer:
+        "Es simple. Inicia sesión en nuestra plataforma, elige el tipo de espacio que deseas reservar (cancha de fútbol, pista de tenis, etc.), selecciona la fecha y hora, y completa el proceso de reserva con el pago seguro.",
+    },
+    {
+      question: "¿Puedo cancelar o modificar una reserva?",
+      answer:
+        "Sí, puedes realizar cambios en tus reservas. Accede a tu cuenta, ve a la sección de 'Mis Reservas' y selecciona la reserva que deseas modificar o cancelar. Ten en cuenta nuestras políticas de cancelación.",
+    },
+    {
+      question:
+        "¿Cómo puedo estar seguro de la calidad de los espacios reservados?",
+      answer:
+        "Trabajamos con instalaciones deportivas de alta calidad y confiables. Antes de ofrecer un espacio en nuestra plataforma, evaluamos su estado y comodidades para asegurarnos de que cumpla con nuestros estándares y tus expectativas.",
+    },
+    {
+      question: "¿Qué opciones de pago están disponibles?",
+      answer:
+        "Aceptamos varias formas de pago, incluyendo tarjetas de crédito y débito. Nuestro sistema de pago en línea es seguro y encriptado para proteger tus datos financieros.",
+    },
+  ];
+
+  const [selectedCity, setSelectedCity] = React.useState<CityOption | null>(
+    null
+  );
+
+  const handleChange = (selectedOption: CityOption | null) => {
+    setSelectedCity(selectedOption);
+  };
+
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.type = "date";
+  };
+
+  // Franco, funcionalidad.
+  const [cities, setCities] = useState<{ value: string; label: string }[]>([]);
+
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (selectedCity) {
+      router.push(`/search?city=${selectedCity.value}`);
+    } else {
+    }
+  };
+
+  interface CityData {
+    ciudad: {
+      nombre: string;
+    };
+  }
+
+  const cityMapping: { [key: string]: string } = {
+    buenos_aires: "Buenos Aires",
+    cordoba: "Córdoba",
+    mendoza: "Mendoza",
+    rosario: "Rosario",
+    san_juan: "San Juan",
+    
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://goolbooking-api.onrender.com/api/fields?ciudad")
+      .then((response) => {
+        const citiesData: CityData[] = response.data;
+  
+        const cityOptions = citiesData.map((city) => ({
+          value: city.ciudad.nombre,
+          label: cityMapping[city.ciudad.nombre] || city.ciudad.nombre, 
+        }));
+  
+        const limitedCityOptions = cityOptions.slice(0, 5);
+  
+        setCities(limitedCityOptions);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las ciudades:", error);
+      });
+  }, []);
+  
+
+  return (
+    <div className="w-full h-full m-auto text-color-text-black font-inriasans">
+      <section className="bg-banner py-[150px] bg-no-repeat bg-cover bg-center">
+        <div className="max-w-[1020px] m-auto">
+          <h1
+            className="text-5xl text-center text-color-text-white font-bold"
+            style={{
+              textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+            }}
+          >
+            ¡Reserva Tu Espacio Deportivo y Eleva Tu Juego!
+          </h1>
+          <p
+            className="text-xl m-auto text-center max-w-2xl justify-center my-20 text-color-text-white"
+            style={{
+              textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+            }}
+          >
+            Encuentra, reserva y disfruta de instalaciones deportivas de primera
+            clase en minutos.
+          </p>
+          <div className="border-2 rounded-lg m-auto p-0 bg-[#CDCDCD] justify-around flex items-center">
+            <Select
+              id="selectCity"
+              instanceId="selectCity"
+              name="colors"
+              className="rounded-lg p-3 text-base w-[450px] font-inriasans" 
+              classNamePrefix="select"
+              options={cities}
+              placeholder={
+                <div className="inline-flex justify-start items-center">
+                  <FaLocationDot className="mr-2 text-color-button text-xl" />
+                  Ubicación
                 </div>
-            </div>
+              }
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  cursor: 'pointer',
+                  minHeight: "2.75rem",
+                }),
+              }}
+              value={selectedCity}
+              onChange={handleChange}
+              components={{
+                Option: CustomOption,
+                SingleValue: CustomSingleValue,
+              }}
+            />
 
-            <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-                <Image
-                    className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-                    src="/next.svg"
-                    alt="Next.js Logo"
-                    width={180}
-                    height={37}
-                    priority
+            <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
+              <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
+              <input
+                type="text"
+                id="dateInput"
+                name="date"
+                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
+                onFocus={handleFocus}
+                placeholder="Fecha"
+              />
+            </div>
+            <input
+              type="button"
+              value="BUSCAR"
+              className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
+              onClick={handleSearch} 
+            />
+          </div>
+        </div>
+      </section>
+      <section className="bg-color-bg py-36 max-w-[1200px] m-auto">
+        <div className="flex justify-around">
+          <div className="w-[600px]">
+            <h3 className="text-2xl m-5 font-bold text-left">
+              Reserva de Canchas de Fútbol
+            </h3>
+            <p className="text-lg text-clip m-5 text-left">
+              Reserva canchas de fútbol en línea para partidos amistosos o
+              torneos.
+            </p>
+            <ul className="list-disc m-5">
+              <li className="text-lg m-2">Variedad de tamaños disponibles.</li>
+              <li className="text-lg m-2">Horarios flexibles</li>
+              <li className="text-lg m-2">
+                Sistema de pago seguro y confirmación instantánea.
+              </li>
+            </ul>
+          </div>
+          <div className="w-[600px] h-[350px] overflow-hidden relative rounded-md">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="https://images.unsplash.com/photo-1517747614396-d21a78b850e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1854&q=80"
+                alt="This is an image of the service"
+                width={600}
+                height={350}
+                className="rotate-90 origin-center transform"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-around my-36">
+          <div className="w-[600px] h-[350px] overflow-hidden relative rounded-md">
+            <Image
+              src="https://images.unsplash.com/photo-1459865264687-595d652de67e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="This is an image of the service"
+              width={600}
+              height={350}
+              className=""
+            />
+          </div>
+          <div className="w-[600px] ">
+            <h3 className="text-2xl ml-10 my-5 font-bold text-left">
+              Alquiler de Pistas de Tenis
+            </h3>
+            <p className="text-xl text-clip ml-10 my-5 text-left">
+              Encuentra y reserva pistas de tenis con facilidad. Ya sea para un
+              juego casual o entrenamiento intensivo.
+            </p>
+            <ul className="list-disc ml-10 my-5">
+              <li className="text-lg m-2">
+                Selección de pistas en superficies diversas.
+              </li>
+              <li className="text-lg m-2">
+                Opciones de reserva por horas para adaptarse a tu agenda.
+              </li>
+              <li className="text-lg m-2">
+                Calidad garantizada de las instalaciones.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex justify-around">
+          <div className="w-[600px]">
+            <h3 className="text-2xl m-5 font-bold text-left">
+              Espacios para Entrenamiento Personal
+            </h3>
+            <p className="text-xl text-clip m-5 text-left">
+              Descubre espacios ideales para tu entrenamiento personalizado. Ya
+              seas un atleta profesional o simplemente quieras mantenerte en
+              forma.
+            </p>
+            <ul className="list-disc m-5">
+              <li className="text-lg m-2">
+                Amplia variedad de gimnasios y centros de entrenamiento.
+              </li>
+              <li className="text-lg m-2">Filtros de búsqueda.</li>
+              <li className="text-lg m-2">Reserva de espacios privados.</li>
+            </ul>
+          </div>
+          <div className="w-[600px] h-[350px] overflow-hidden relative rounded-md">
+            <Image
+              src="https://images.pexels.com/photos/8941650/pexels-photo-8941650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="This is an image of the service"
+              width={600}
+              height={350}
+              className=""
+            />
+          </div>
+        </div>
+      </section>
+      <section className="py-28 border-color-text-black border-2 bg-usercomments">
+        <div className="max-w-[1020px] m-auto flex justify-between">
+          <ClientOpinion
+            name="Valentina Rodríguez"
+            profilePictureSrc="https://images.unsplash.com/photo-1615912021740-c4290248ea76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
+            comment="Increíblemente conveniente. Reservar una cancha de tenis es pan comido ahora. Horarios flexibles y confirmación instantánea hacen que todo sea más fácil."
+          />
+          <ClientOpinion
+            name="Alejandro González"
+            profilePictureSrc="https://images.unsplash.com/photo-1641280173256-0ac1b2f4cd78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
+            comment="El sistema de reserva de gimnasios es genial. Encuentro fácilmente un lugar para entrenar, y la opción de espacios privados es perfecta."
+          />
+          <ClientOpinion
+            name="Diego Martínez"
+            profilePictureSrc="https://images.unsplash.com/photo-1602339786708-26ad0b0aeedb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
+            comment="¡Finalmente puedo organizar partidos de fútbol sin complicaciones! Reservar canchas es rápido, y la variedad de tamaños me permite elegir según nuestra cantidad de jugadores."
+          />
+        </div>
+      </section>
+      <section
+        className="py-28 bg-center bg-cover "
+        style={{
+          backgroundImage: `url("../assets/FAQ.png")`,
+        }}
+      >
+        <div className="max-w-[1020px] m-auto border-2 border-color-button p-12 bg-white">
+          <h2 className="text-4xl font-bold">FAQs</h2>
+          <div>
+            <div className="my-12">
+              {faqData.map((item, index) => (
+                <Accordion
+                  key={index}
+                  title={item.question}
+                  content={item.answer}
                 />
+              ))}
             </div>
+          </div>
+        </div>
+      </section>
+      <section
+        className="py-28 bg-color-bg bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url("../assets/bg-search.png")`,
+        }}
+      >
+        <div className="max-w-[1020px] m-auto">
+          <h2
+            className="text-5xl text-center mb-28 text-white"
+            style={{
+              textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+            }}
+          >
+            Encuentra Tu Lugar Perfecto para Jugar
+          </h2>
+          <div className="border-2 rounded-lg m-auto p-0 bg-[#CDCDCD] justify-around flex items-center">
+            <Select
+              id="selectCity"
+              instanceId="selectCity"
+              name="colors"
+              className="rounded-lg p-3 text-base w-[450px] font-inriasans"
+              classNamePrefix="select"
+              options={cities}
+              placeholder={
+                <div className="inline-flex justify-start items-center">
+                  <FaLocationDot className="mr-2 text-color-button text-xl" />
+                  Ubicación
+                </div>
+              }
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                   cursor: 'pointer',
+                  minHeight: "2.75rem",
+                }),
+              }}
+              value={selectedCity}
+              onChange={handleChange}
+              components={{
+                Option: CustomOption,
+                SingleValue: CustomSingleValue,
+              }}
+            />
 
-            <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-                <a
-                    href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={`mb-3 text-2xl font-semibold`}>
-                        Docs{" "}
-                        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                            -&gt;
-                        </span>
-                    </h2>
-                    <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                        Find in-depth information about Next.js features and
-                        API.
-                    </p>
-                </a>
-
-                <a
-                    href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={`mb-3 text-2xl font-semibold`}>
-                        Learn{" "}
-                        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                            -&gt;
-                        </span>
-                    </h2>
-                    <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                        Learn about Next.js in an interactive course
-                        with&nbsp;quizzes!
-                    </p>
-                </a>
-
-                <a
-                    href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={`mb-3 text-2xl font-semibold`}>
-                        Templates{" "}
-                        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                            -&gt;
-                        </span>
-                    </h2>
-                    <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                        Explore the Next.js 13 playground.
-                    </p>
-                </a>
-
-                <a
-                    href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={`mb-3 text-2xl font-semibold`}>
-                        Deploy{" "}
-                        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                            -&gt;
-                        </span>
-                    </h2>
-                    <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                        Instantly deploy your Next.js site to a shareable URL
-                        with Vercel.
-                    </p>
-                </a>
+            <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
+              <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
+              <input
+                type="text"
+                id="dateInput"
+                name="date"
+                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
+                onFocus={handleFocus}
+                placeholder="Fecha"
+                onKeyUp={(event) => {
+                  if (event.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
+              />
             </div>
-        </main>
-    );
+            <input
+              type="button"
+              value="BUSCAR"
+              className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
+              onClick={handleSearch} // Asocia la función de manejo de clic
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
