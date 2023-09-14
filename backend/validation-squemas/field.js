@@ -1,21 +1,15 @@
 import z from "zod";
 import { Deportes } from "@prisma/client";
 
-const horarioSchema = z.object({
-    horaInicio: z.string(),
-    horaFin: z.string(),
-    diaSemana: z.enum(["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]),
-});
-
 const fieldSquema = z.object({
     nombre: z.string({
         invalid_type_error: "El nombre debe ser una cadena de texto",
         required_error: "El nombre es requerido para crear la cancha"
-    }).nonempty({ message: "El nombre es requerido" }),
+    }).nonempty({message: "El nombre es requerido"}),
     descripcion: z.string(),
     precio: z.number().positive(),
     deporte: z.enum(["futbol", "tenis", "basquet"]),
-    ciudad: z.string({ required_error: "La ciudad es requerida" }),
+    ciudad: z.string({required_error: "La ciudad es requerida"}),
     valoracion: z.number().positive().max(5, "La valoración no puede ser mayor a 5"),
     url: z.string(),
     servicios: z.array(z.string())
