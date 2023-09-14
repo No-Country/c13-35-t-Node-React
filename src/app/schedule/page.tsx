@@ -20,7 +20,7 @@ export default function Schedule() {
   if (!scheduleData) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-10">
+    <div className="flex flex-col items-center py-10">
       <h1 className="text-black text-4xl font-medium uppercase mb-4">TURNOS DISPONIBLES</h1>
       <h2 className="text-black text-2xl mb-2 font-medium">{scheduleData.date}</h2>
       <h3 className="text-black text-xl mb-4 font-medium">Valor $500/hora</h3>
