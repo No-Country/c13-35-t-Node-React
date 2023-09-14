@@ -10,7 +10,7 @@ horarioRouter.post("/fields/:id/horarios", HorarioController.createHorario);
 horarioRouter.patch("/horarios/:id", HorarioController.updateHorario);
 
 // Ruta para eliminar un horario por su ID
-horarioRouter.delete("/horarios/:id", HorarioController.deleteHorario);
+horarioRouter.delete("/horarios/:id", HorarioController.deleteHorarioByFieldId);
 
 // Ruta para obtener los horarios disponibles para un campo específico
-horarioRouter.get("/fields/:id/horarios", HorarioController.getAvailableHorarios);
+// horarioRouter.get("/fields/:id/horarios", HorarioController.get);
