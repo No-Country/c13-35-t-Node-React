@@ -56,10 +56,10 @@ const Register2: React.FC<Register2Props> = (props) => {
         if (form.current) {
             emailjs
                 .sendForm(
-                    "service_703t9cg",
-                    "template_ya20m5f",
+                    "service_ufxu1jm",
+                    "template_z44do1a",
                     form.current,
-                    "l5gbij0EO5KK0gFQX"
+                    "ZNatgk5c_gNL_YC0o"
                 )
                 .then((result) => {
                     console.log(result.text);
