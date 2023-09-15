@@ -129,67 +129,7 @@ function AboutPage() {
                 
                 <p className="text-justify mt-2">Estudiante de ingeniería de sistemas / Programador junior enfocado en desarrollo frontend/ Html - Css - JavaScript - C# /React.js</p>
               </div>
-            </div>
-            <div className="flex w-2/3">
-              
-              <div className="flex flex-col justify-center text-right w-1/2">
-                <div className="flex justify-between">
-                    <div className="flex items-center gap-3 text-xl">
-                      <Link href="https://www.linkedin.com/in/giulianaborgo/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
-                      <Link href="https://github.com/GiulianaBorgo" target='_blank' rel="noreferrer"><BsGithub /></Link>
-                    </div>
-                    <div>
-                      <h6>FRONTEND DEV</h6>
-                      <h5 className="font-bold">GIULIANA BORGO</h5>
-                    </div>
-                </div>                
-                
-                <p className="text-justify mt-2">Desarrolladora Full Stack (React.js, Javascript, Java, HTML, CSS, SQL).</p>
-              </div>
-              <div className="w-1/2 flex justify-center">
-                <img src="../../assets/giuliana.jpg" alt="giuliana"  className="h-80 w-80 rounded-full border border-blue-800"/>
-              </div>
-            </div>
-            <div className="flex w-2/3">
-              <div className="w-1/2 flex justify-center">
-                <img src="../../assets/fernanda.jpg" alt="fernanda"  className="h-80 w-80 rounded-full border border-blue-800"/>
-              </div>
-              <div className="flex flex-col justify-center w-1/2">
-                <div className="flex justify-between">
-                    <div>
-                        <h6>FRONTEND DEV</h6>
-                        <h5 className="font-bold">FERNANDA CALZOLARI</h5>
-                    </div>                    
-                    <div className="flex items-center gap-3 text-xl">
-                        <Link href="https://www.linkedin.com/in/mariafernandacalzolari/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
-                        <Link href="https://github.com/fercalzo" target='_blank' rel="noreferrer"><BsGithub /></Link>
-                    </div>
-
-                </div>
-                
-                <p className="text-justify mt-2">Soy desarrolladora frontend, con conocimientos de react js, tailwind css, bootstrap.</p>
-              </div>
-            </div>
-            <div className="flex w-2/3">              
-              <div className="flex flex-col justify-center text-right w-1/2">
-                <div className="flex justify-between">
-                <div className="flex text-xl gap-3 items-center">
-                  <Link href="https://www.linkedin.com/in/marcos-aravena/" target='_blank' rel="noreferrer"><FaLinkedin /></Link>
-                  <Link href="https://github.com/msaravena" target='_blank' rel="noreferrer"><BsGithub /></Link>
-                </div>
-                <div>
-                  <h6>FRONTEND DEV</h6>
-                  <h5 className="font-bold">IAIR KAPLUN</h5>
-                </div>
-
-                </div>
-                
-                <p className="text-justify mt-2">Lorem ipsum dolor sit amet  consectetur adipisicing elit consectetur adipisicing eli. Eligendi ducimus perferendis assumenda eos numquam porro culpa nisi odio</p>
-              </div>
-              <div className="w-1/2 flex justify-center">
-                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="iair"  className="h-80 w-80 rounded-full border border-blue-800"/>
-              </div>
-            </div>
+            </div>   
             <div className="flex w-2/3">
               <div className="w-1/2 flex justify-center">
                 <img src="../../assets/david.jpg" alt="david"  className="h-80 w-80 rounded-full border border-blue-800"/>
