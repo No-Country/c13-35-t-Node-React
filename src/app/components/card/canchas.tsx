@@ -77,7 +77,7 @@ export default function Canchas() {
       fetchData();
       setError("");
     }
-  }, [deporte, ciudad, setCurrentPage, currentPage, minimo, maximo, servicios]);
+  }, [deporte, ciudad, setCurrentPage, currentPage, minimo, maximo, servicios, setCanchas, error]);
 
   // Ordena las canchas según el criterio seleccionado
   const ordenComparators: { [key: string]: (a: any, b: any) => number } = {
