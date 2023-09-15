@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Select, {
   components,
@@ -79,7 +79,7 @@ export default function Home() {
 
   const handleSearch = () => {
     if (selectedCity) {
-      router.push(`/search?city=${selectedCity.value}`);
+      router.push(`/search`);
     } else {
     }
   };
