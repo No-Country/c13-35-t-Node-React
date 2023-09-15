@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-calendar {
+    box-shadow: 0 1em 3em rgba(156, 136, 255, 0.2);
+}
 
+.custom-today-day {
+    color: #576702 !important;
+    border: 1px solid #576702 !important;
+}
 
+.custom-today-day::after {
+    visibility: hidden; /* hide small border under the text */
+}
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
