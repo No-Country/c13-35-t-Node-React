@@ -1,32 +1,37 @@
-import React from 'react';
-import Link from 'next/link';
-import { BsGithub } from 'react-icons/bs';
-import { FaLinkedin } from 'react-icons/fa';
+import React from "react";
+import Link from "next/link";
+import { BsGithub } from "react-icons/bs";
+import { FaLinkedin } from "react-icons/fa";
 
 function AboutPage() {
-  return (
-    <>
-      <section
-        className="flex justify-center items-center bg-cover bg-center h-80 w-full font-inriasans"
-        style={{ backgroundImage: 'url(../../assets/cancha1.jpg)' }}
-      >
-        <h3 className="text-5xl font-semibold" style={{ textShadow: '4px 4px 8px rgba(0, 0, 0, 0.5)' }}>
-          ACERCA DE
-        </h3>
-      </section>
-      <section className="text-center bg-white text-black px-20 h-80 font-inriasans">
-        <div className="mx-auto w-1/3">
-          <div className="flex justify-between py-4">
-            <Link href="#ourproduct">
-              <h2>NUESTRO PRODUCTO</h2>
-            </Link>{' '}
-            <Link href="#aboutus">
-              <h2>NOSOTROS</h2>
-            </Link>
-          </div>
-        </div>
+    return (
+        <>
+            <section
+                className="flex justify-center items-center bg-cover bg-center h-80 w-full font-inriasans"
+                style={{ backgroundImage: "url(../../assets/cancha1.jpg)" }}
+            >
+                <h3
+                    className="text-5xl font-semibold text-white"
+                    style={{
+                        textShadow: `-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black`,
+                    }}
+                >
+                    ACERCA DE
+                </h3>
+            </section>
+            <section className="text-center bg-white text-black px-20 h-80 font-inriasans">
+                <div className="mx-auto w-1/3">
+                    <div className="flex justify-between py-4">
+                        <Link href="#ourproduct">
+                            <h2>NUESTRO PRODUCTO</h2>
+                        </Link>{" "}
+                        <Link href="#aboutus">
+                            <h2>NOSOTROS</h2>
+                        </Link>
+                    </div>
+                </div>
 
-        <div className="h-0.5 w-90 bg-gradient-to-r from-transparent via-black to-transparent mx-auto"></div>
+                <div className="h-0.5 w-90 bg-gradient-to-r from-transparent via-black to-transparent mx-auto"></div>
 
         <div className="mt-8 mb-10 flex flex-col gap-5">
           <h4 className="mt-10">NUESTRO PRODUCTO</h4>

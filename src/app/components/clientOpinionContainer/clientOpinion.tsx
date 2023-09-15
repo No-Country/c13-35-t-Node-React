@@ -10,7 +10,7 @@ interface ClientOpinionProps {
 const ClientOpinion: React.FC<ClientOpinionProps> = (props) => {
     return (
         <div className="w-[330px] border-2 h-96 bg-white border-color-button p-7 text-color-text-black font-inriasans flex flex-col justify-end">
-            <p className="text-justify flex-grow">
+            <p className="text-left flex-grow leading-8">
                 <q>{props.comment}</q>
             </p>
             <div className="rounded-full bg-black my-3 h-[67px] w-[67px] overflow-hidden">
@@ -24,7 +24,7 @@ const ClientOpinion: React.FC<ClientOpinionProps> = (props) => {
                     ></Image>
                 )}
             </div>
-            <h3 className="text-left ">{props.name}</h3>
+            <h3 className="text-left font-bold">{props.name}</h3>
         </div>
     );
 };
