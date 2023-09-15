@@ -43,7 +43,7 @@ export default function Schedule() {
       </div>
 
       <Link href="/pago"><button className="bg-576702 text-f9f9f9 w-1/3 py-2 rounded-lg mb-4">CONFIRMAR LA RESERVA</button></Link>
-      <Link href=""><button className="bg-f9f9f9 border-2 border-576702 text-576702 w-1/3 py-2 rounded-lg">VOLVER</button></Link>
+      <Link href="/search"><button className="bg-f9f9f9 border-2 border-576702 text-576702 w-1/3 py-2 rounded-lg">VOLVER</button></Link>
       <div
     className='bg-cover bg-center w-full h-full absolute top-0 left-0'
     style={{
