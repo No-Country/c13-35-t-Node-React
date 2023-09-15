@@ -11,6 +11,7 @@ import ClientOpinion from "./components/clientOpinionContainer/clientOpinion";
 import Accordion from "./components/accordion/accordion";
 import { FaLocationDot, FaCalendarDays } from "react-icons/fa6";
 import axios from "axios";
+import useFiltersStore from "./search/filtersState";
 
 const CustomOption: React.FC<OptionProps<any>> = ({ innerProps, label }) => (
   <div className="m-3" {...innerProps}>
@@ -36,6 +37,7 @@ type CityOption = {
 };
 
 export default function Home() {
+  const { setCiudad } = useFiltersStore();
   const faqData = [
     {
       question: "¿Cómo puedo reservar un espacio deportivo en línea?",
@@ -66,6 +68,7 @@ export default function Home() {
 
   const handleChange = (selectedOption: CityOption | null) => {
     setSelectedCity(selectedOption);
+    setCiudad(selectedOption?.value);
   };
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -96,7 +99,6 @@ export default function Home() {
     mendoza: "Mendoza",
     rosario: "Rosario",
     san_juan: "San Juan",
-    
   };
 
   useEffect(() => {
@@ -104,21 +106,20 @@ export default function Home() {
       .get("https://goolbooking-api.onrender.com/api/fields?ciudad")
       .then((response) => {
         const citiesData: CityData[] = response.data;
-  
+
         const cityOptions = citiesData.map((city) => ({
           value: city.ciudad.nombre,
-          label: cityMapping[city.ciudad.nombre] || city.ciudad.nombre, 
+          label: cityMapping[city.ciudad.nombre] || city.ciudad.nombre,
         }));
-  
+
         const limitedCityOptions = cityOptions.slice(0, 5);
-  
+
         setCities(limitedCityOptions);
       })
       .catch((error) => {
         console.error("Error al obtener las ciudades:", error);
       });
   }, []);
-  
 
   return (
     <div className="w-full h-full m-auto text-color-text-black font-inriasans">
@@ -146,7 +147,7 @@ export default function Home() {
               id="selectCity"
               instanceId="selectCity"
               name="colors"
-              className="rounded-lg p-3 text-base w-[450px] font-inriasans" 
+              className="rounded-lg p-3 text-base w-[450px] font-inriasans"
               classNamePrefix="select"
               options={cities}
               placeholder={
@@ -158,7 +159,7 @@ export default function Home() {
               styles={{
                 control: (provided) => ({
                   ...provided,
-                  cursor: 'pointer',
+                  cursor: "pointer",
                   minHeight: "2.75rem",
                 }),
               }}
@@ -185,7 +186,7 @@ export default function Home() {
               type="button"
               value="BUSCAR"
               className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
-              onClick={handleSearch} 
+              onClick={handleSearch}
             />
           </div>
         </div>
@@ -352,7 +353,7 @@ export default function Home() {
               styles={{
                 control: (provided) => ({
                   ...provided,
-                   cursor: 'pointer',
+                  cursor: "pointer",
                   minHeight: "2.75rem",
                 }),
               }}
