@@ -12,15 +12,16 @@ import Select, {
     SingleValueProps,
     OptionProps,
 } from "react-select";
-import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
+import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker, {
     DayValue,
     RenderInputProps,
-} from '@hassanmojab/react-modern-calendar-datepicker';
+} from "@hassanmojab/react-modern-calendar-datepicker";
 import ClientOpinion from "./components/clientOpinionContainer/clientOpinion";
 import Accordion from "./components/accordion/accordion";
 import { FaLocationDot, FaCalendarDays } from "react-icons/fa6";
 import axios from "axios";
+import { dividerClasses } from "@mui/material";
 
 const CustomOption: React.FC<OptionProps<any>> = ({ innerProps, label }) => (
     <div className="m-3" {...innerProps}>
@@ -137,28 +138,31 @@ export default function Home() {
     const renderCustomInput: FunctionComponent<RenderInputProps> = ({
         ref,
     }) => (
-        <input
-            readOnly
-            ref={ref as React.RefObject<HTMLInputElement>} // Necessary
-            placeholder="Fecha"
-            value={
-                selectedDay
-                    ? `${selectedDay.day}/${selectedDay.month}/${selectedDay.year}`
-                    : ""
-            }
-            style={{
-                textAlign: "left",
-                padding: "12px",
-                paddingLeft: "40px",
-                fontSize: "16px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                color: "#191414",
-                width: "350px",
-                height: "42px",
-            }}
-            className="my-custom-input-class"
-        />
+        <div className="inline-flex justify-start items-center">
+            <input
+                readOnly
+                ref={ref as React.RefObject<HTMLInputElement>} // Necessary
+                placeholder="Fecha"
+                value={
+                    selectedDay
+                        ? `${selectedDay.day}/${selectedDay.month}/${selectedDay.year}`
+                        : ""
+                }
+                style={{
+                    textAlign: "left",
+                    padding: "12px",
+                    paddingLeft: "40px",
+                    fontSize: "16px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    color: "#191414",
+                    width: "350px",
+                    height: "42px",
+                }}
+                className="my-custom-input-class"
+            />
+            <FaCalendarDays className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-color-button" />
+        </div>
     );
 
     const handleDateChange = (date: DayValue | null) => {
@@ -216,19 +220,22 @@ export default function Home() {
                         />
 
                         <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
-                            <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
-                            <DatePicker
-                                value={selectedDay}
-                                onChange={handleDateChange}
-                                renderInput={renderCustomInput}
-                                formatInputText={formatInputValue}
-                                inputPlaceholder="Fecha" // placeholder
-                                shouldHighlightWeekends
-                                colorPrimary="#576702"
-                                calendarClassName="custom-calendar" // and this
-                                calendarTodayClassName="custom-today-day"
-                            />
+                            <div className="relative">
+                                <DatePicker
+                                    value={selectedDay}
+                                    onChange={handleDateChange}
+                                    renderInput={renderCustomInput}
+                                    formatInputText={formatInputValue}
+                                    inputPlaceholder="Fecha"
+                                    shouldHighlightWeekends
+                                    colorPrimary="#576702"
+                                    calendarClassName="custom-calendar"
+                                    calendarTodayClassName="custom-today-day"
+                                    inputClassName=" absolute pl-10 z-[-1] "
+                                />
+                            </div>
                         </div>
+
                         <input
                             type="button"
                             value="BUSCAR"
@@ -423,26 +430,26 @@ export default function Home() {
                         />
 
                         <div className="relative inline-flex justify-start items-center transition-all duration-300 ease-in-out">
-                            <FaCalendarDays className="absolute m-2 text-color-button text-xl" />
-                            <input
-                                type="text"
-                                id="dateInput"
-                                name="date"
-                                className="rounded-lg p-2 text-base h-12 pl-10 w-80"
-                                onFocus={handleFocus}
-                                placeholder="Fecha"
-                                onKeyUp={(event) => {
-                                    if (event.key === "Enter") {
-                                        handleSearch();
-                                    }
-                                }}
-                            />
+                            <div className="relative">
+                                <DatePicker
+                                    value={selectedDay}
+                                    onChange={handleDateChange}
+                                    renderInput={renderCustomInput}
+                                    formatInputText={formatInputValue}
+                                    inputPlaceholder="Fecha"
+                                    shouldHighlightWeekends
+                                    colorPrimary="#576702"
+                                    calendarClassName="custom-calendar"
+                                    calendarTodayClassName="custom-today-day"
+                                    inputClassName=" absolute pl-10 z-[-1] "
+                                />
+                            </div>
                         </div>
                         <input
                             type="button"
                             value="BUSCAR"
                             className="bg-color-button hover:bg-color-button-hover color w-40 h-12 rounded-lg text-color-text-white font-bold text-base transition-all ease-in-out cursor-pointer"
-                            onClick={handleSearch} // Asocia la función de manejo de clic
+                            onClick={handleSearch}
                         />
                     </div>
                 </div>
